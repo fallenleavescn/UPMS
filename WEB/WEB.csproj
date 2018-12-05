@@ -108,17 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Models\ModelDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelDB.Context.cs</LastGenOutput>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
     </Content>
-    <Content Include="Models\ModelDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-      <LastGenOutput>ModelDB.cs</LastGenOutput>
-    </Content>
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -126,62 +118,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\cardlevels.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\categories.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\consumeorders.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\exchanggifts.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\exchanglogs.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\memcards.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\shops.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\syslogs.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\transferlogs.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\users.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\ModelDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelDB.edmx.diagram">
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -192,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\System\" />
   </ItemGroup>
   <ItemGroup>
