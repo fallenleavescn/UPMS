@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e0707a831a7d492caa6b18eba6aa9d74" Name="Diagram1">
+        <EntityTypeShape EntityType="testdbModel.cardlevels" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testdbModel.categories" Width="1.5" PointX="0.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testdbModel.consumeorders" Width="1.5" PointX="5.25" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="testdbModel.exchanggifts" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testdbModel.exchanglogs" Width="1.5" PointX="8.25" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testdbModel.memcards" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testdbModel.shops" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testdbModel.syslogs" Width="1.5" PointX="5.25" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="testdbModel.transferlogs" Width="1.5" PointX="5.25" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testdbModel.users" Width="1.5" PointX="3" PointY="35.375" IsExpanded="true" />
+        <AssociationConnector Association="testdbModel.FK_MEMCARDS_REFERENCE_CARDLEVE" ManuallyRouted="false" />
+        <AssociationConnector Association="testdbModel.FK_CONSUMEO_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="testdbModel.FK_CONSUMEO_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="testdbModel.FK_EXCHANGG_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="testdbModel.FK_EXCHANGL_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="testdbModel.FK_EXCHANGL_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="testdbModel.FK_MEMCARDS_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="testdbModel.FK_TRANSFER_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="testdbModel.FK_USERS_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="testdbModel.FK_SYSLOGS_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="testdbModel.FK_TRANSFER_REFERENCE_USERS" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
