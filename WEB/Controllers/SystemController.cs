@@ -13,10 +13,5 @@ namespace WEB.Controllers
         {
             return View();
         }
-
-        public string Login()
-        {
-                
-        }
     }
 }
