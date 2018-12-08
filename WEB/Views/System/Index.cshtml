@@ -1,0 +1,24 @@
+﻿@model WEB.Models.users
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>欢迎您，请登录</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Login", "System", @FormMethod.Post, new { id = "loginForm", name = "loginForm", @class = "form-inline loginform" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Label("账号")@Html.TextBoxFor(acc => acc.U_LoginName)<br/>
+            @Html.Label("密码")@Html.TextBoxFor(pwd => pwd.U_Password)<br />
+            <input type="submit" value="登录" />
+        }
+    </div>
+</body>
+</html>
