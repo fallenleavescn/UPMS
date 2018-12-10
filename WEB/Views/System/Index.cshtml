@@ -9,15 +9,30 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>欢迎您，请登录</title>
+    <script type="text/javascript" src="~/Content/Scripts/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/login.css" />
 </head>
 <body>
-    <div>
+    <div class='signup_container'>
+        <h1 class='signup_title'>用户登陆</h1>
+        <img src="~/Content/css/images/people.png" id='admin' />
+        <div id="message" style="font-size:larger;color:red;">@ViewBag.ErrorMsg</div><br />
         @using (Html.BeginForm("Login", "System", @FormMethod.Post, new { id = "loginForm", name = "loginForm", @class = "form-inline loginform" }))
         {
             @Html.AntiForgeryToken()
-            @Html.Label("账号")@Html.TextBoxFor(acc => acc.U_LoginName)<br/>
-            @Html.Label("密码")@Html.TextBoxFor(pwd => pwd.U_Password)<br />
-            <input type="submit" value="登录" />
+            <div id="signup_forms" class="signup_forms clearfix">
+                <div class="form_row first_row">
+                    @Html.LabelFor(acc => acc.U_LoginName, "请输入账号")
+                    @Html.TextBoxFor(acc => acc.U_LoginName)
+                </div>
+                <div class="form_row">
+                    @Html.LabelFor(pwd => pwd.U_Password, "请输入密码")
+                    @Html.TextBoxFor(pwd => pwd.U_Password)
+                </div>
+            </div>
+            <div class="login-btn-set">
+                <input type="submit" class="login-btn" value=""/>
+            </div>
         }
     </div>
 </body>

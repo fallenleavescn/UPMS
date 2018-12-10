@@ -10,17 +10,38 @@ namespace WEB.Controllers
     public class SystemController : Controller
     {
         [HttpGet]
-        public ActionResult Index()
-        { 
+        public ActionResult Index(string msg = null)
+        {
+            if(!string.IsNullOrEmpty(msg)) ViewBag.ErrorMsg = msg;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login()
+        public ActionResult Login(users user)
         {
+            string ErrorMsg = string.Empty;
 
-            return RedirectToAction("index");
+            if (ModelState.IsValid)
+            {
+                using (DBEntities db = new DBEntities())
+                { 
+                    var UserTbl = from u in db.users
+                                  where u.U_LoginName == user.U_LoginName && u.U_Password == user.U_Password
+                                  select u.S_ID;
+
+                    if (UserTbl.FirstOrDefault().HasValue)
+                    {
+                        ErrorMsg = string.Empty;
+                        Session["user"] = user;
+                        return RedirectToAction("info", "current");
+                    }
+                    else ErrorMsg = "账号或密码错误！";
+                }
+            }
+            else ErrorMsg = "请输入账号和密码！";
+
+            return RedirectToAction("index", new { msg = ErrorMsg });
         }
     }
 }
