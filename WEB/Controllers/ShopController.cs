@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace WEB.Controllers
 {
-    public class ShopAdminController : Controller
+    public class ShopController : Controller
     {
         [HttpGet]
         public ActionResult Index()
