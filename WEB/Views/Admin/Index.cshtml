@@ -1,0 +1,231 @@
+﻿@using WEB.Models
+@{
+    Layout = null;
+    users user = Session["user"] as users;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>会员消费积分管理平台</title>
+    <link href="~/Content/css/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/easyui/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/easyui/icon.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/Scripts/easyui/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/easyui/jquery-easyui-min.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/easyui/easyui-lang-zh_CN.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            //在前台自动显示菜单的信息根据用户的信息
+            //BindMenuDataGroupType();
+            //绑定菜单单击事件
+            BindMenuClickHrefEvent();
+            //读取动态时间的变化
+            //ReadDateTimeShow();
+            //这里实现对时间动态的变化
+            //var setTimeInterval = setInterval(ReadDateTimeShow, 1000);
+            //实现Tab布局
+            $("#ttTab").tabs({});
+
+            $(".CloseAll").click(function () {
+                $("#ttTab li").each(function (index, obj) {
+                    //获取所有可关闭的选项卡
+                    var tab = $(".tabs-closable", this).text();
+                    $(".easyui-tabs").tabs('close', tab);
+                });
+            });
+            $(".ExchangePassword").click(function () {
+                $("#dlg").dialog({ width: 300, height: 200 }).dialog("setTitle", "修改个人密码").dialog("open");
+                $("#frm").attr("src", "/Login/ExchangPassword");
+            });
+            $(".ExchangeMessage").click(function () {
+                $("#dlg").dialog({ width: 300, height: 200 }).dialog("setTitle", "修改个人资料").dialog("open");
+                $("#frm").attr("src", "/Login/ExchangeMessage");
+            });
+            var b_c, c;
+            $(".ul-menu li").hover(
+                function () {
+                    b_c = $(this).css("background-color");
+                    $(this).css("background-color", "#34AFFF");
+                    c = $(this).css("color");
+                    $(this).css("color", "#ffffff");
+                    $(this).css("cursor", "pointer");
+                },
+                function () {
+                    $(this).css("background-color", b_c);
+                    $(this).css("color", c);
+                }
+            );
+        });
+        //绑定前台菜单栏
+        function BindMenuDataGroupType() {
+            //根据异步读取发送过来的Json字符串
+            $.getJSON("/Home/LoadMenuData", {}, function (data) {
+                //实现在菜单拦中的显示,遍历节点集合
+                for (var i = 0; i < data.length; i++) {
+                    var groupInfo = data[i]; //拿到组的信息
+
+                    //拿到内容的信息,每个菜单项构造成一个p标签
+                    var strMenuItemHTMl = "";
+                    for (var j = 0; j < groupInfo.MenuItems.length; j++) {
+                        var menuItem = groupInfo.MenuItems[j];
+                        strMenuItemHTMl += '<p><a href="javascript:void(0)" src="' + menuItem.Url + '" class="menuLink">' + menuItem.MenuName + '</a></p>';
+                    }
+                    //EasyUI新增节点
+                    $("#aa").accordion('add', {
+                        title: groupInfo.GroupName,
+                        content: strMenuItemHTMl,
+                        selected: false
+                    });
+                    //$("#aa").accordion('select', groupInfo.GroupName);
+                }
+                //绑定用户单击跳转事件
+                BindMenuClickHrefEvent();
+            });
+        }
+        //实现用户单击导航栏跳转页面的方法
+        function BindMenuClickHrefEvent() {
+            $(".ul-menu li a").click(function () {
+                //获取按钮里面的Src属性
+                var src = $(this).attr("url");
+                //将主框架的iframe跳转到菜单指向的地址，$("#frmWorkArea").attr("src", src);
+                //Tab页面新增页面标签，每当单击左边的导航栏的时候跳转
+                var titleShow = $(this).text();
+                var strHtml = '<iframe id="frmWorkArea" width="100%" height="99%" frameborder="0" scrolling="no" src="' + src + '"></iframe>';
+                //判断Tab标签中是否有相同的数据标签
+                var isExist = $("#ttTab").tabs('exists', titleShow);
+                if (!isExist) {
+                    $("#ttTab").tabs('add', {
+                        title: titleShow,
+                        content: strHtml,
+                        iconCls: 'icon-ok',
+                        closable: true
+                    });
+                }
+                else {
+                    $('#ttTab').tabs('select', titleShow);
+                }
+            });
+        }
+        //读取动态时间的变化
+        function ReadDateTimeShow() {
+            var year = new Date().getFullYear();
+            var Month = new Date().getMonth() + 1;
+            var Day = new Date().getDate();
+            var Time = new Date().toLocaleTimeString();
+            var AddDate = year + "年" + Month + "月" + Day + "日 " + Time;
+            $("#date").text(AddDate);
+        }
+    </script>
+</head>
+<body class="easyui-layout">
+    @if (user != null)
+    {
+        <div data-options="region:'north',border:false" style="height: 60px; background: #2E70CC;padding:10px;
+        color: #ffffff">
+            <div style="float: left;">
+                <img alt="" src="/Images/logo.png" width="120px" height="40px" />
+            </div>
+            <div style="float: left; font-size: 14px; padding-left: 30px; padding-top: 15px;">
+                会员消费积分管理平台&nbsp;&nbsp;&nbsp;&nbsp; 当前用户:
+                @user.U_RealName
+            </div>
+            <div class="link" style="float: right;font-size: 14px; padding-right:100px; padding-top: 10px;background: #2E70CC;">
+                <a href="#" class="easyui-linkbutton CloseAll" data-options="plain:true,iconCls:'icon_Delete'">关闭全部</a>
+                <a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon_Person2'">
+                    账号管理
+                </a>
+            </div>
+            <div id="mm1" style="width: 150px;">
+                <div data-options="iconCls:'icon_PersonEdit'">
+                    <a href="#" class="ExchangeMessage">修改个人资料</a>
+                </div>
+                <div class="menu-sep">
+                </div>
+                <div data-options="iconCls:'icon_Edit'">
+                    <a href="#" class="ExchangePassword">修改密码</a>
+                </div>
+                <div class="menu-sep">
+                </div>
+                <div data-options="iconCls:'icon-back'">
+                    @Html.ActionLink("退出系统", "LoginOff", "Login")
+                </div>
+            </div>
+        </div>
+        <div data-options="region:'west',split:true,title:'菜单导航'" style="width: 180px;">
+            <div class="easyui-accordion" data-options="fit:true,border:false">
+                @if (user.U_Role == 1)
+                {
+                    <div title="系统管理" style="padding: 10px;">
+                        <ul class='ul-menu'>
+                            <li><a url="/Shop/Index">店铺管理</a></li>
+                            <li><a url="/CardLevel/Index">会员等级管理</a></li>
+                        </ul>
+                    </div>
+                }
+                @if (user.U_Role == 2)
+                {
+                    <div title="用户管理" style="padding: 10px;">
+                        <ul class='ul-menu'>
+                            <li><a url="/User/Index">用户列表</a></li>
+                        </ul>
+                    </div>
+                }
+                @if (user.U_Role != 1)
+                {
+                    <div title="礼品管理" style="padding: 10px;">
+                        <ul class='ul-menu'>
+                            <li><a url="/ExchangGift/Index">礼品列表</a></li>
+                        </ul>
+                    </div>
+                    <div title="会员管理" style="padding: 10px;">
+                        <ul class='ul-menu'>
+                            <li><a url="/MemCard/Index">会员列表</a></li>
+                        </ul>
+                    </div>
+                    <div title="会员消费" style="padding: 10px;">
+                        <ul class='ul-menu'>
+                            <li><a url="/ConsumeOrder/FastConsume">快速消费</a></li>
+                            <li><a url="/ConsumeOrder/SubstracPoint">会员减积分</a></li>
+                            <li><a url="/ConsumeOrder/SelectConsumeOrderInfo">消费历史记录</a></li>
+                        </ul>
+                    </div>
+                    <div title="积分兑换" style="padding: 10px;">
+                        <ul class='ul-menu'>
+                            <li><a url="/ExchangLog/Index">积分兑换礼品</a></li>
+                            <li><a url="/ConsumeOrder/PointExchangMoney">积分返现</a></li>
+                            <li><a url="/ExchangLog/SelectExchangeLogByMemCardIDOrMobile">兑换历史记录</a></li>
+                        </ul>
+                    </div>
+                }
+                @if (user.U_Role == 2)
+                {
+                    <div title="统计中心" style="padding: 10px;">
+                        <ul class='ul-menu'>
+                            <li><a url="/ConsumeOrder/FastConsumeStatistic">快速消费统计</a></li>
+                            <li><a url="/ConsumeOrder/SelectMemConsumeStatistic">会员消费情况统计</a></li>
+                            <li><a url="/ConsumeOrder/MemSubstracPoint">减积分统计</a></li>
+                            <li><a url="/ConsumeOrder/MemExchangePointToMoney">积分返现统计</a></li>
+                            <li><a url="/ExchangGift/GiftExchangCount">礼品兑换统计</a></li>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+        <div data-options="region:'center'" style="overflow: hidden;">
+            <div id="ttTab" class="easyui-tabs" data-options="tools:'#tab-tools',border:false,fit:true"
+                 style="overflow: hidden;">
+            </div>
+        </div>
+        <div data-options="region:'south',border:false" style="height: 40px; padding: 10px;
+        background: #2E70CC; text-align: center; color: #ffffff">
+            版权所有 @@copy 2015 会员消费积分管理平台
+        </div>
+        <div id="dlg" class="easyui-dialog" data-options="modal:true,closed:true">
+            <iframe id="frm" width="99%" height="98%" frameborder="0" scrolling="no"></iframe>
+        </div>
+    }
+
+</body>
+</html>

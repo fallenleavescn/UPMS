@@ -34,7 +34,7 @@ namespace WEB.Controllers
                     {
                         ErrorMsg = string.Empty;
                         Session["user"] = user;
-                        return RedirectToAction("info", "current");
+                        return RedirectToAction("index", "Admin");
                     }
                     else ErrorMsg = "账号或密码错误！";
                 }
