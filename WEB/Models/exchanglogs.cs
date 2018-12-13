@@ -12,7 +12,7 @@ namespace WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class exchanglogs
+    public partial class ExchangLogs
     {
         public int EL_ID { get; set; }
         public Nullable<int> S_ID { get; set; }
@@ -27,7 +27,7 @@ namespace WEB.Models
         public Nullable<int> EL_Point { get; set; }
         public Nullable<System.DateTime> EL_CreateTime { get; set; }
     
-        public virtual shops shops { get; set; }
-        public virtual users users { get; set; }
+        public virtual Shops Shops { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

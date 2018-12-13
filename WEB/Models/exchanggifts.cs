@@ -12,7 +12,7 @@ namespace WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class exchanggifts
+    public partial class ExchangGifts
     {
         public int EG_ID { get; set; }
         public Nullable<int> S_ID { get; set; }
@@ -24,6 +24,6 @@ namespace WEB.Models
         public Nullable<int> EG_ExchangNum { get; set; }
         public string EG_Remark { get; set; }
     
-        public virtual shops shops { get; set; }
+        public virtual Shops Shops { get; set; }
     }
 }

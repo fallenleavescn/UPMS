@@ -13,10 +13,10 @@ namespace WEB.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBEntities : DbContext
+    public partial class UPMSEntities : DbContext
     {
-        public DBEntities()
-            : base("name=DBEntities")
+        public UPMSEntities()
+            : base("name=UPMSEntities")
         {
         }
     
@@ -25,16 +25,16 @@ namespace WEB.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<cardlevels> cardlevels { get; set; }
-        public virtual DbSet<categories> categories { get; set; }
-        public virtual DbSet<categoryitems> categoryitems { get; set; }
-        public virtual DbSet<consumeorders> consumeorders { get; set; }
-        public virtual DbSet<exchanggifts> exchanggifts { get; set; }
-        public virtual DbSet<exchanglogs> exchanglogs { get; set; }
-        public virtual DbSet<memcards> memcards { get; set; }
-        public virtual DbSet<shops> shops { get; set; }
-        public virtual DbSet<syslogs> syslogs { get; set; }
-        public virtual DbSet<transferlogs> transferlogs { get; set; }
-        public virtual DbSet<users> users { get; set; }
+        public virtual DbSet<CardLevels> CardLevels { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<CategoryItems> CategoryItems { get; set; }
+        public virtual DbSet<ConsumeOrders> ConsumeOrders { get; set; }
+        public virtual DbSet<ExchangGifts> ExchangGifts { get; set; }
+        public virtual DbSet<ExchangLogs> ExchangLogs { get; set; }
+        public virtual DbSet<MemCards> MemCards { get; set; }
+        public virtual DbSet<Shops> Shops { get; set; }
+        public virtual DbSet<SysLogs> SysLogs { get; set; }
+        public virtual DbSet<TransferLogs> TransferLogs { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

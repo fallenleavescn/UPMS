@@ -18,15 +18,15 @@ namespace WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(users user)
+        public ActionResult Login(Users user)
         {
             string ErrorMsg = string.Empty;
 
             if (ModelState.IsValid)
             {
-                using (DBEntities db = new DBEntities())
+                using (UPMSEntities db = new UPMSEntities())
                 { 
-                    var UserTbl = from u in db.users
+                    var UserTbl = from u in db.Users
                                   where u.U_LoginName == user.U_LoginName && u.U_Password == user.U_Password
                                   select u.S_ID;
 

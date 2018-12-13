@@ -12,7 +12,7 @@ namespace WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class memcards
+    public partial class MemCards
     {
         public int MC_ID { get; set; }
         public Nullable<int> CL_ID { get; set; }
@@ -25,8 +25,8 @@ namespace WEB.Models
         public string MC_Photo { get; set; }
         public Nullable<int> MC_Birthday_Month { get; set; }
         public Nullable<int> MC_Birthday_Day { get; set; }
-        public Nullable<sbyte> MC_BirthdayType { get; set; }
-        public Nullable<sbyte> MC_IsPast { get; set; }
+        public Nullable<byte> MC_BirthdayType { get; set; }
+        public Nullable<bool> MC_IsPast { get; set; }
         public Nullable<System.DateTime> MC_PastTime { get; set; }
         public Nullable<int> MC_Point { get; set; }
         public Nullable<float> MC_Money { get; set; }
@@ -34,13 +34,13 @@ namespace WEB.Models
         public Nullable<int> MC_TotalCount { get; set; }
         public Nullable<int> MC_OverCount { get; set; }
         public Nullable<int> MC_State { get; set; }
-        public Nullable<sbyte> MC_IsPointAuto { get; set; }
+        public Nullable<bool> MC_IsPointAuto { get; set; }
         public Nullable<int> MC_RefererID { get; set; }
         public string MC_RefererCard { get; set; }
         public string MC_RefererName { get; set; }
         public Nullable<System.DateTime> MC_CreateTime { get; set; }
     
-        public virtual cardlevels cardlevels { get; set; }
-        public virtual shops shops { get; set; }
+        public virtual CardLevels CardLevels { get; set; }
+        public virtual Shops Shops { get; set; }
     }
 }

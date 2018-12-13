@@ -4,30 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="74ab06aa6dfe466da4de431ec7a4413e" Name="Diagram1">
-        <EntityTypeShape EntityType="DBModel.cardlevels" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.categories" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.categoryitems" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.consumeorders" Width="1.5" PointX="5.25" PointY="24.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.exchanggifts" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.exchanglogs" Width="1.5" PointX="8.25" PointY="24.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.memcards" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.shops" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.syslogs" Width="1.5" PointX="5.25" PointY="36.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.transferlogs" Width="1.5" PointX="5.25" PointY="29.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.users" Width="1.5" PointX="3" PointY="35.375" IsExpanded="true" />
-        <AssociationConnector Association="DBModel.FK_MEMCARDS_REFERENCE_CARDLEVE" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_CATEGORY_REFERENCE_CATEGORI" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_CONSUMEO_REFERENCE_SHOPS" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_CONSUMEO_REFERENCE_USERS" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_EXCHANGG_REFERENCE_SHOPS" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_EXCHANGL_REFERENCE_SHOPS" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_EXCHANGL_REFERENCE_USERS" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_MEMCARDS_REFERENCE_SHOPS" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_TRANSFER_REFERENCE_SHOPS" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_USERS_REFERENCE_SHOPS" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_SYSLOGS_REFERENCE_USERS" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_TRANSFER_REFERENCE_USERS" ManuallyRouted="false" />
+      <Diagram DiagramId="d4c9f25552554ebdacbf14bf04daf724" Name="Diagram1">
+        <EntityTypeShape EntityType="UPMSModel.CardLevels" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPMSModel.Categories" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPMSModel.CategoryItems" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPMSModel.ConsumeOrders" Width="1.5" PointX="5.25" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPMSModel.ExchangGifts" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPMSModel.ExchangLogs" Width="1.5" PointX="8.25" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPMSModel.MemCards" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPMSModel.Shops" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPMSModel.SysLogs" Width="1.5" PointX="5.25" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPMSModel.TransferLogs" Width="1.5" PointX="5.25" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPMSModel.Users" Width="1.5" PointX="3" PointY="35.375" IsExpanded="true" />
+        <AssociationConnector Association="UPMSModel.FK_MEMCARDS_REFERENCE_CARDLEVE" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_CATEGORY_REFERENCE_CATEGORI" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_CONSUMEO_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_CONSUMEO_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_EXCHANGG_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_EXCHANGL_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_EXCHANGL_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_MEMCARDS_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_TRANSFER_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_USERS_REFERENCE_SHOPS" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_SYSLOGS_REFERENCE_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="UPMSModel.FK_TRANSFER_REFERENCE_USERS" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

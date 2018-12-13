@@ -12,13 +12,13 @@ namespace WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class consumeorders
+    public partial class ConsumeOrders
     {
         public int CO_ID { get; set; }
         public Nullable<int> S_ID { get; set; }
         public Nullable<int> U_ID { get; set; }
         public string CO_OrderCode { get; set; }
-        public Nullable<sbyte> CO_OrderType { get; set; }
+        public Nullable<byte> CO_OrderType { get; set; }
         public Nullable<int> MC_ID { get; set; }
         public string MC_CardID { get; set; }
         public Nullable<int> EG_ID { get; set; }
@@ -29,7 +29,7 @@ namespace WEB.Models
         public string CO_Remark { get; set; }
         public Nullable<System.DateTime> CO_CreateTime { get; set; }
     
-        public virtual shops shops { get; set; }
-        public virtual users users { get; set; }
+        public virtual Shops Shops { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

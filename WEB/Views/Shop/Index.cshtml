@@ -1,7 +1,7 @@
 ﻿@using WEB.Models
 @{
     Layout = null;
-    List<categoryitems> listc = ViewBag.type as List<categoryitems>;
+    List<CategoryItems> listc = ViewBag.type as List<CategoryItems>;
 }
 <html>
 <head>
@@ -31,20 +31,20 @@
             queryParams: param,
             fitColumns: true,
             columns: [[
-                { title: "店铺编号", field: "S_ID", width: 100 },
+                { title: "店铺编号", field: "S_ID", width: 30 },
                 { title: "店铺名称", field: "S_Name", width: 100 },
-                { title: "店铺类型", field: "CI_Name", width: 100 },
-                { title: "联系人", field: "S_ContactName", width: 100 },
-                { title: "联系电话", field: "S_ContactTel", width: 100 },
+                { title: "店铺类型", field: "CI_Name", width: 50 },
+                { title: "联系人", field: "S_ContactName", width: 40 },
+                { title: "联系电话", field: "S_ContactTel", width: 50 },
                 { title: "地址", field: "S_Address", width: 100 },
                 { title: "备注", field: "S_Remark", width: 100 },
                 {
-                    title: "是否添加管理员", field: "S_IsHasSetAdmin", width: 100, formatter: function (value, row, index) {
+                    title: "是否添加管理员", field: "S_IsHasSetAdmin", width: 40, formatter: function (value, row, index) {
                         return row.S_IsHasSetAdmin;
                     }
                 },
                 {
-                    title: "加盟时间", field: "S_CreateTime", width: 100, formatter: function (value, row, index) {
+                    title: "加盟时间", field: "S_CreateTime", width: 50, formatter: function (value, row, index) {
                         return changeDateFormat(row.S_CreateTime);
                     }
                 }
@@ -84,7 +84,7 @@
     function InsertBtn() {
         $("#ID").val("");
         $("#txt_ShopName").val("");
-        $("#typeName").prop("selectedIndex", 0);
+        $("#txt_Category").prop("selectedIndex", 0);
         $("#txt_TellName").val("");
         $("#txt_Phone").val("");
         $("#txt_Address").val("");
@@ -111,7 +111,7 @@
                 modal: true //定义窗口是不是模态（modal）窗口。
             });
             $("#txt_ShopName").val(row.S_Name);
-            $("#typeName").prop("selectedIndex", row.CI_ID);
+            $("#txt_Category").prop("selectedIndex", row.CI_ID);
             $("#txt_TellName").val(row.S_ContactName);
             $("#txt_Phone").val(row.S_ContactTel);
             $("#txt_Address").val(row.S_Address);
@@ -124,40 +124,40 @@
     //修改
     function Edit() {
         var param = {};
-        param.txt_ShopName = $("#txt_ShopName").val();
-        param.typeName = $("#typeName").val();
-        param.txt_TellName = $("#txt_TellName").val();
-        param.txt_Phone = $("#txt_Phone").val();
-        param.txt_Address = $("#txt_Address").val();
-        param.txt_Remark = $("#txt_Remark").val();
+        param.ShopName = $("#txt_ShopName").val();
+        param.Category = $("#txt_Category").val();
+        param.TellName = $("#txt_TellName").val();
+        param.Phone = $("#txt_Phone").val();
+        param.Address = $("#txt_Address").val();
+        param.Remark = $("#txt_Remark").val();
         param.ID = $.trim($("#ID").attr("value"));
-        $.post("/Shop/Update", param, function (result) {
-            if (result.Code == 0) {
-                alert(result.Message);
+
+        $.post("/Shop/UpdateShop", param, function (result) {
+            if (result.status == 1) {
+                alert(result.msg);
                 $("#div_Add").dialog("close", false);
                 $("#ShopInfo").datagrid('reload');
             } else {
-                alert(result.Message);
+                alert(result.msg);
             }
         });
     }
     //添加
     function Add() {
-
         var param = {};
-        param.txt_ShopName = $("#txt_ShopName").val();
-        param.typeName = $("#typeName").val();
-        param.txt_TellName = $("#txt_TellName").val();
-        param.txt_Phone = $("#txt_Phone").val();
-        param.txt_Address = $("#txt_Address").val();
-        param.txt_Remark = $("#txt_Remark").val();
+        param.ShopName = $("#txt_ShopName").val();
+        param.Category = $("#txt_Category").val();
+        param.TellName = $("#txt_TellName").val();
+        param.Phone = $("#txt_Phone").val();
+        param.Address = $("#txt_Address").val();
+        param.Remark = $("#txt_Remark").val();
         $.post("/Shop/AddShop", param, function (result) {
-            if (result.Code == 0) {
-                alert(result.Message);
+            if (result.status == 1) {
+                alert(result.msg);
                 $("#div_Add").dialog("close", false);
                 $("#ShopInfo").datagrid('reload');
             } else {
-                alert(result.Message);
+                alert(result.msg);
             }
         });
     }
@@ -165,13 +165,13 @@
     function Delete() {
         var row = $("#ShopInfo").datagrid('getSelected');
         if (row != null) {
-            $.post("/Shop/Delete", { ID: row.S_ID }, function (result) {
-                if (result.Code == 0) {
-                    alert(result.Message);
+            $.post("/Shop/DeleteShop", { ID: row.S_ID }, function (result) {
+                if (result.status == 1) {
+                    alert(result.msg);
+                    $("#del").dialog("close", false);
                     $("#ShopInfo").datagrid('reload');
-
                 } else {
-                    alert(result.Message);
+                    alert(result.msg);
                 }
             });
         } else {
@@ -180,7 +180,14 @@
     }
     //提交按钮
     function Sumbit() {
-        debugger
+        var ShopName = $("#txt_ShopName").val();
+        var TellName = $("#txt_TellName").val();
+        var Address = $("#txt_Address").val();
+        var txt_Category = $("#txt_Category").val();
+        if (ShopName.length < 1 || TellName.length < 1 || Address.length < 1 || txt_Category == 0) {
+            alert("店铺名、类型、联系人、地址不得为空！");
+            return;
+        }
         var id = $.trim($("#ID").attr("value"));
         if (id != "") {
             Edit();
@@ -221,8 +228,8 @@
     </div>
     <div id="del" class="easyui-dialog" data-options="modal:true,closed:true" style="text-align:center">
         <h1>确定要删除吗？</h1>
-        <input type="button" onclick='Delete(); $("#del").dialog("close", false)' value="确定" />
-        <input type="button" onclick='$("#div_Add").dialog("close", false);' value="取消" />
+        <input type="button" onclick='Delete()' value="确定" />
+        <input type="button" onclick='$("#del").dialog("close", false)' value="取消" />
     </div>
     <div id="div_Add" class="easyui-dialog" data-options="modal:true,closed:true,iconCls:'icon-add'">
         <input type="hidden" id="ID" />
@@ -234,12 +241,12 @@
             <tr>
                 <td>店铺类型</td>
                 <td>
-                    <select id="typeName">
+                    <select id="txt_Category">
                         <option value="0">==请选择==</option>
                         @{
                             if (listc != null)
                             {
-                                foreach (categoryitems item in listc)
+                                foreach (CategoryItems item in listc)
                                 {
                                     <option value="@item.CI_ID">@item.CI_Name</option>
                                 }

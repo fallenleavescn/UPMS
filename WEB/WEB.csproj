@@ -517,25 +517,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\cardlevels.cs">
+    <Compile Include="Models\CardLevels.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\categories.cs">
+    <Compile Include="Models\Categories.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\categoryitems.cs">
+    <Compile Include="Models\CategoryItems.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\consumeorders.cs">
+    <Compile Include="Models\ConsumeOrders.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\exchanggifts.cs">
+    <Compile Include="Models\ExchangGifts.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\exchanglogs.cs">
+    <Compile Include="Models\ExchangLogs.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\memcards.cs">
+    <Compile Include="Models\MemCards.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelDB.Context.cs">
@@ -554,16 +554,16 @@
       <DependentUpon>ModelDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\paramModel.cs" />
-    <Compile Include="Models\shops.cs">
+    <Compile Include="Models\Shops.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\syslogs.cs">
+    <Compile Include="Models\SysLogs.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\transferlogs.cs">
+    <Compile Include="Models\TransferLogs.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\users.cs">
+    <Compile Include="Models\Users.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

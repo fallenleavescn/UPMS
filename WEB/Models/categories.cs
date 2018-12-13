@@ -12,19 +12,19 @@ namespace WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class categories
+    public partial class Categories
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public categories()
+        public Categories()
         {
-            this.categoryitems = new HashSet<categoryitems>();
+            this.CategoryItems = new HashSet<CategoryItems>();
         }
     
         public string C_Category { get; set; }
         public string C_Illustration { get; set; }
-        public Nullable<sbyte> C_IsShow { get; set; }
+        public Nullable<bool> C_IsShow { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<categoryitems> categoryitems { get; set; }
+        public virtual ICollection<CategoryItems> CategoryItems { get; set; }
     }
 }

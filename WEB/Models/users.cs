@@ -11,43 +11,36 @@ namespace WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    public partial class users
+    
+    public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public users()
+        public Users()
         {
-            this.consumeorders = new HashSet<consumeorders>();
-            this.exchanglogs = new HashSet<exchanglogs>();
-            this.syslogs = new HashSet<syslogs>();
-            this.transferlogs = new HashSet<transferlogs>();
+            this.ConsumeOrders = new HashSet<ConsumeOrders>();
+            this.ExchangLogs = new HashSet<ExchangLogs>();
+            this.SysLogs = new HashSet<SysLogs>();
+            this.TransferLogs = new HashSet<TransferLogs>();
         }
     
         public int U_ID { get; set; }
         public Nullable<int> S_ID { get; set; }
-        [MaxLength(20)]
-        [Required]
         public string U_LoginName { get; set; }
-        [MaxLength(50)]
-        [Required]
         public string U_Password { get; set; }
-        [MaxLength(20)]
         public string U_RealName { get; set; }
-        [MaxLength(10)]
         public string U_Sex { get; set; }
-        [MaxLength(20)]
         public string U_Telephone { get; set; }
         public Nullable<int> U_Role { get; set; }
-        public Nullable<sbyte> U_CanDelete { get; set; }
+        public Nullable<bool> U_CanDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<consumeorders> consumeorders { get; set; }
+        public virtual ICollection<ConsumeOrders> ConsumeOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<exchanglogs> exchanglogs { get; set; }
-        public virtual shops shops { get; set; }
+        public virtual ICollection<ExchangLogs> ExchangLogs { get; set; }
+        public virtual Shops Shops { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<syslogs> syslogs { get; set; }
+        public virtual ICollection<SysLogs> SysLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<transferlogs> transferlogs { get; set; }
+        public virtual ICollection<TransferLogs> TransferLogs { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class transferlogs
+    public partial class TransferLogs
     {
         public int TL_ID { get; set; }
         public Nullable<int> S_ID { get; set; }
@@ -25,7 +25,7 @@ namespace WEB.Models
         public string TL_Remark { get; set; }
         public Nullable<System.DateTime> TL_CreateTime { get; set; }
     
-        public virtual shops shops { get; set; }
-        public virtual users users { get; set; }
+        public virtual Shops Shops { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

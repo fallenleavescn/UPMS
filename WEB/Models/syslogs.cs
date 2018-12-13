@@ -12,7 +12,7 @@ namespace WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class syslogs
+    public partial class SysLogs
     {
         public int SL_ID { get; set; }
         public Nullable<int> U_ID { get; set; }
@@ -20,6 +20,6 @@ namespace WEB.Models
         public string SL_Details { get; set; }
         public Nullable<System.DateTime> SL_CreateTime { get; set; }
     
-        public virtual users users { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

@@ -4,26 +4,26 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="cardlevels">
+      <Schema Namespace="UPMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CardLevels">
           <Key>
             <PropertyRef Name="CL_ID" />
           </Key>
-          <Property Name="CL_ID" Type="int" Nullable="false" />
-          <Property Name="CL_LevelName" Type="varchar" MaxLength="20" />
-          <Property Name="CL_NeedPoint" Type="varchar" MaxLength="50" />
-          <Property Name="CL_Point" Type="double" />
-          <Property Name="CL_Percent" Type="double" />
+          <Property Name="CL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CL_LevelName" Type="nvarchar" MaxLength="20" />
+          <Property Name="CL_NeedPoint" Type="nvarchar" MaxLength="50" />
+          <Property Name="CL_Point" Type="float" />
+          <Property Name="CL_Percent" Type="float" />
         </EntityType>
-        <EntityType Name="categories">
+        <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="C_Category" />
           </Key>
           <Property Name="C_Category" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="C_Illustration" Type="varchar" MaxLength="20" />
-          <Property Name="C_IsShow" Type="tinyint" />
+          <Property Name="C_IsShow" Type="bit" />
         </EntityType>
-        <EntityType Name="categoryitems">
+        <EntityType Name="CategoryItems">
           <Key>
             <PropertyRef Name="CI_KeyID" />
           </Key>
@@ -32,370 +32,370 @@
           <Property Name="CI_ID" Type="int" />
           <Property Name="CI_Name" Type="varchar" MaxLength="20" />
         </EntityType>
-        <EntityType Name="consumeorders">
+        <EntityType Name="ConsumeOrders">
           <Key>
             <PropertyRef Name="CO_ID" />
           </Key>
-          <Property Name="CO_ID" Type="int" Nullable="false" />
+          <Property Name="CO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="S_ID" Type="int" />
           <Property Name="U_ID" Type="int" />
-          <Property Name="CO_OrderCode" Type="varchar" MaxLength="20" />
+          <Property Name="CO_OrderCode" Type="nvarchar" MaxLength="20" />
           <Property Name="CO_OrderType" Type="tinyint" />
           <Property Name="MC_ID" Type="int" />
-          <Property Name="MC_CardID" Type="varchar" MaxLength="50" />
+          <Property Name="MC_CardID" Type="nvarchar" MaxLength="50" />
           <Property Name="EG_ID" Type="int" />
-          <Property Name="CO_TotalMoney" Type="float" />
-          <Property Name="CO_DiscountMoney" Type="float" />
+          <Property Name="CO_TotalMoney" Type="real" />
+          <Property Name="CO_DiscountMoney" Type="real" />
           <Property Name="CO_GavePoint" Type="int" />
-          <Property Name="CO_Recash" Type="float" />
-          <Property Name="CO_Remark" Type="varchar" MaxLength="255" />
-          <Property Name="CO_CreateTime" Type="datetime" Precision="0" />
+          <Property Name="CO_Recash" Type="real" />
+          <Property Name="CO_Remark" Type="nvarchar" MaxLength="255" />
+          <Property Name="CO_CreateTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="exchanggifts">
+        <EntityType Name="ExchangGifts">
           <Key>
             <PropertyRef Name="EG_ID" />
           </Key>
-          <Property Name="EG_ID" Type="int" Nullable="false" />
+          <Property Name="EG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="S_ID" Type="int" />
-          <Property Name="EG_GiftCode" Type="varchar" MaxLength="255" />
-          <Property Name="EG_GiftName" Type="varchar" MaxLength="255" />
-          <Property Name="EG_Photo" Type="varchar" MaxLength="255" />
+          <Property Name="EG_GiftCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="EG_GiftName" Type="nvarchar" MaxLength="255" />
+          <Property Name="EG_Photo" Type="nvarchar" MaxLength="255" />
           <Property Name="EG_Point" Type="int" />
           <Property Name="EG_Number" Type="int" />
           <Property Name="EG_ExchangNum" Type="int" />
-          <Property Name="EG_Remark" Type="varchar" MaxLength="255" />
+          <Property Name="EG_Remark" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="exchanglogs">
+        <EntityType Name="ExchangLogs">
           <Key>
             <PropertyRef Name="EL_ID" />
           </Key>
-          <Property Name="EL_ID" Type="int" Nullable="false" />
+          <Property Name="EL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="S_ID" Type="int" />
           <Property Name="U_ID" Type="int" />
           <Property Name="MC_ID" Type="int" />
-          <Property Name="MC_CardID" Type="varchar" MaxLength="50" />
-          <Property Name="MC_Name" Type="varchar" MaxLength="20" />
+          <Property Name="MC_CardID" Type="nvarchar" MaxLength="50" />
+          <Property Name="MC_Name" Type="nvarchar" MaxLength="20" />
           <Property Name="EG_ID" Type="int" />
-          <Property Name="EG_GiftCode" Type="varchar" MaxLength="50" />
-          <Property Name="EG_GiftName" Type="varchar" MaxLength="50" />
+          <Property Name="EG_GiftCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="EG_GiftName" Type="nvarchar" MaxLength="50" />
           <Property Name="EL_Number" Type="int" />
           <Property Name="EL_Point" Type="int" />
-          <Property Name="EL_CreateTime" Type="datetime" Precision="0" />
+          <Property Name="EL_CreateTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="memcards">
+        <EntityType Name="MemCards">
           <Key>
             <PropertyRef Name="MC_ID" />
           </Key>
-          <Property Name="MC_ID" Type="int" Nullable="false" />
+          <Property Name="MC_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CL_ID" Type="int" />
           <Property Name="S_ID" Type="int" />
-          <Property Name="MC_CardID" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="MC_Password" Type="varchar" MaxLength="20" />
-          <Property Name="MC_Name" Type="varchar" MaxLength="20" />
+          <Property Name="MC_CardID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MC_Password" Type="nvarchar" MaxLength="20" />
+          <Property Name="MC_Name" Type="nvarchar" MaxLength="20" />
           <Property Name="MC_Sex" Type="int" />
-          <Property Name="MC_Mobile" Type="varchar" MaxLength="50" />
-          <Property Name="MC_Photo" Type="varchar" MaxLength="200" />
+          <Property Name="MC_Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="MC_Photo" Type="nvarchar" MaxLength="200" />
           <Property Name="MC_Birthday_Month" Type="int" />
           <Property Name="MC_Birthday_Day" Type="int" />
           <Property Name="MC_BirthdayType" Type="tinyint" />
-          <Property Name="MC_IsPast" Type="tinyint" />
-          <Property Name="MC_PastTime" Type="datetime" Precision="0" />
+          <Property Name="MC_IsPast" Type="bit" />
+          <Property Name="MC_PastTime" Type="datetime" />
           <Property Name="MC_Point" Type="int" />
-          <Property Name="MC_Money" Type="float" />
-          <Property Name="MC_TotalMoney" Type="float" />
+          <Property Name="MC_Money" Type="real" />
+          <Property Name="MC_TotalMoney" Type="real" />
           <Property Name="MC_TotalCount" Type="int" />
           <Property Name="MC_OverCount" Type="int" />
           <Property Name="MC_State" Type="int" />
-          <Property Name="MC_IsPointAuto" Type="tinyint" />
+          <Property Name="MC_IsPointAuto" Type="bit" />
           <Property Name="MC_RefererID" Type="int" />
-          <Property Name="MC_RefererCard" Type="varchar" MaxLength="50" />
-          <Property Name="MC_RefererName" Type="varchar" MaxLength="20" />
-          <Property Name="MC_CreateTime" Type="datetime" Precision="0" />
+          <Property Name="MC_RefererCard" Type="nvarchar" MaxLength="50" />
+          <Property Name="MC_RefererName" Type="nvarchar" MaxLength="20" />
+          <Property Name="MC_CreateTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="shops">
+        <EntityType Name="Shops">
           <Key>
             <PropertyRef Name="S_ID" />
           </Key>
-          <Property Name="S_ID" Type="int" Nullable="false" />
+          <Property Name="S_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="S_Name" Type="varchar" MaxLength="20" />
           <Property Name="S_Category" Type="int" />
           <Property Name="S_ContactName" Type="varchar" MaxLength="20" />
           <Property Name="S_ContactTel" Type="varchar" MaxLength="20" />
           <Property Name="S_Address" Type="varchar" MaxLength="50" />
           <Property Name="S_Remark" Type="varchar" MaxLength="100" />
-          <Property Name="S_IsHasSetAdmin" Type="tinyint" />
-          <Property Name="S_CreateTime" Type="datetime" Precision="0" />
+          <Property Name="S_IsHasSetAdmin" Type="bit" />
+          <Property Name="S_CreateTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="syslogs">
+        <EntityType Name="SysLogs">
           <Key>
             <PropertyRef Name="SL_ID" />
           </Key>
-          <Property Name="SL_ID" Type="int" Nullable="false" />
+          <Property Name="SL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="U_ID" Type="int" />
-          <Property Name="SL_Module" Type="varchar" MaxLength="20" />
-          <Property Name="SL_Details" Type="varchar" MaxLength="255" />
-          <Property Name="SL_CreateTime" Type="datetime" Precision="0" />
+          <Property Name="SL_Module" Type="nvarchar" MaxLength="20" />
+          <Property Name="SL_Details" Type="nvarchar" MaxLength="255" />
+          <Property Name="SL_CreateTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="transferlogs">
+        <EntityType Name="TransferLogs">
           <Key>
             <PropertyRef Name="TL_ID" />
           </Key>
-          <Property Name="TL_ID" Type="int" Nullable="false" />
+          <Property Name="TL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="S_ID" Type="int" />
           <Property Name="U_ID" Type="int" />
           <Property Name="TL_FromMC_ID" Type="int" />
-          <Property Name="TL_FromMC_CardID" Type="varchar" MaxLength="50" />
+          <Property Name="TL_FromMC_CardID" Type="nvarchar" MaxLength="50" />
           <Property Name="TL_ToMC_ID" Type="int" />
-          <Property Name="TL_ToMC_CardID" Type="varchar" MaxLength="50" />
-          <Property Name="TL_TransferMoney" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="TL_ToMC_CardID" Type="nvarchar" MaxLength="50" />
+          <Property Name="TL_TransferMoney" Type="money" />
           <Property Name="TL_Remark" Type="varchar" MaxLength="200" />
-          <Property Name="TL_CreateTime" Type="datetime" Precision="0" />
+          <Property Name="TL_CreateTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="users">
+        <EntityType Name="Users">
           <Key>
             <PropertyRef Name="U_ID" />
           </Key>
-          <Property Name="U_ID" Type="int" Nullable="false" />
+          <Property Name="U_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="S_ID" Type="int" />
-          <Property Name="U_LoginName" Type="varchar" MaxLength="20" />
-          <Property Name="U_Password" Type="varchar" MaxLength="50" />
-          <Property Name="U_RealName" Type="varchar" MaxLength="20" />
-          <Property Name="U_Sex" Type="varchar" MaxLength="10" />
-          <Property Name="U_Telephone" Type="varchar" MaxLength="20" />
+          <Property Name="U_LoginName" Type="nvarchar" MaxLength="20" />
+          <Property Name="U_Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="U_RealName" Type="nvarchar" MaxLength="20" />
+          <Property Name="U_Sex" Type="nvarchar" MaxLength="10" />
+          <Property Name="U_Telephone" Type="nvarchar" MaxLength="20" />
           <Property Name="U_Role" Type="int" />
-          <Property Name="U_CanDelete" Type="tinyint" />
+          <Property Name="U_CanDelete" Type="bit" />
         </EntityType>
         <Association Name="FK_CATEGORY_REFERENCE_CATEGORI">
-          <End Role="categories" Type="Self.categories" Multiplicity="0..1" />
-          <End Role="categoryitems" Type="Self.categoryitems" Multiplicity="*" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="CategoryItems" Type="Self.CategoryItems" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="categories">
+            <Principal Role="Categories">
               <PropertyRef Name="C_Category" />
             </Principal>
-            <Dependent Role="categoryitems">
+            <Dependent Role="CategoryItems">
               <PropertyRef Name="C_Category" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CONSUMEO_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="consumeorders" Type="Self.consumeorders" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="ConsumeOrders" Type="Self.ConsumeOrders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="consumeorders">
+            <Dependent Role="ConsumeOrders">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CONSUMEO_REFERENCE_USERS">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="consumeorders" Type="Self.consumeorders" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ConsumeOrders" Type="Self.ConsumeOrders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="Users">
               <PropertyRef Name="U_ID" />
             </Principal>
-            <Dependent Role="consumeorders">
+            <Dependent Role="ConsumeOrders">
               <PropertyRef Name="U_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EXCHANGG_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="exchanggifts" Type="Self.exchanggifts" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="ExchangGifts" Type="Self.ExchangGifts" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="exchanggifts">
+            <Dependent Role="ExchangGifts">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EXCHANGL_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="exchanglogs" Type="Self.exchanglogs" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="ExchangLogs" Type="Self.ExchangLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="exchanglogs">
+            <Dependent Role="ExchangLogs">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EXCHANGL_REFERENCE_USERS">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="exchanglogs" Type="Self.exchanglogs" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ExchangLogs" Type="Self.ExchangLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="Users">
               <PropertyRef Name="U_ID" />
             </Principal>
-            <Dependent Role="exchanglogs">
+            <Dependent Role="ExchangLogs">
               <PropertyRef Name="U_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEMCARDS_REFERENCE_CARDLEVE">
-          <End Role="cardlevels" Type="Self.cardlevels" Multiplicity="0..1" />
-          <End Role="memcards" Type="Self.memcards" Multiplicity="*" />
+          <End Role="CardLevels" Type="Self.CardLevels" Multiplicity="0..1" />
+          <End Role="MemCards" Type="Self.MemCards" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="cardlevels">
+            <Principal Role="CardLevels">
               <PropertyRef Name="CL_ID" />
             </Principal>
-            <Dependent Role="memcards">
+            <Dependent Role="MemCards">
               <PropertyRef Name="CL_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEMCARDS_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="memcards" Type="Self.memcards" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="MemCards" Type="Self.MemCards" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="memcards">
+            <Dependent Role="MemCards">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SYSLOGS_REFERENCE_USERS">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="syslogs" Type="Self.syslogs" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="SysLogs" Type="Self.SysLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="Users">
               <PropertyRef Name="U_ID" />
             </Principal>
-            <Dependent Role="syslogs">
+            <Dependent Role="SysLogs">
               <PropertyRef Name="U_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TRANSFER_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="transferlogs" Type="Self.transferlogs" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="TransferLogs" Type="Self.TransferLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="transferlogs">
+            <Dependent Role="TransferLogs">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TRANSFER_REFERENCE_USERS">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="transferlogs" Type="Self.transferlogs" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="TransferLogs" Type="Self.TransferLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="Users">
               <PropertyRef Name="U_ID" />
             </Principal>
-            <Dependent Role="transferlogs">
+            <Dependent Role="TransferLogs">
               <PropertyRef Name="U_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USERS_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="users">
+            <Dependent Role="Users">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBModelStoreContainer">
-          <EntitySet Name="cardlevels" EntityType="Self.cardlevels" Schema="testdb" store:Type="Tables" />
-          <EntitySet Name="categories" EntityType="Self.categories" Schema="testdb" store:Type="Tables" />
-          <EntitySet Name="categoryitems" EntityType="Self.categoryitems" Schema="testdb" store:Type="Tables" />
-          <EntitySet Name="consumeorders" EntityType="Self.consumeorders" Schema="testdb" store:Type="Tables" />
-          <EntitySet Name="exchanggifts" EntityType="Self.exchanggifts" Schema="testdb" store:Type="Tables" />
-          <EntitySet Name="exchanglogs" EntityType="Self.exchanglogs" Schema="testdb" store:Type="Tables" />
-          <EntitySet Name="memcards" EntityType="Self.memcards" Schema="testdb" store:Type="Tables" />
-          <EntitySet Name="shops" EntityType="Self.shops" Schema="testdb" store:Type="Tables" />
-          <EntitySet Name="syslogs" EntityType="Self.syslogs" Schema="testdb" store:Type="Tables" />
-          <EntitySet Name="transferlogs" EntityType="Self.transferlogs" Schema="testdb" store:Type="Tables" />
-          <EntitySet Name="users" EntityType="Self.users" Schema="testdb" store:Type="Tables" />
+        <EntityContainer Name="UPMSModelStoreContainer">
+          <EntitySet Name="CardLevels" EntityType="Self.CardLevels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryItems" EntityType="Self.CategoryItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsumeOrders" EntityType="Self.ConsumeOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExchangGifts" EntityType="Self.ExchangGifts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExchangLogs" EntityType="Self.ExchangLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemCards" EntityType="Self.MemCards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shops" EntityType="Self.Shops" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysLogs" EntityType="Self.SysLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransferLogs" EntityType="Self.TransferLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CATEGORY_REFERENCE_CATEGORI" Association="Self.FK_CATEGORY_REFERENCE_CATEGORI">
-            <End Role="categories" EntitySet="categories" />
-            <End Role="categoryitems" EntitySet="categoryitems" />
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="CategoryItems" EntitySet="CategoryItems" />
           </AssociationSet>
           <AssociationSet Name="FK_CONSUMEO_REFERENCE_SHOPS" Association="Self.FK_CONSUMEO_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="consumeorders" EntitySet="consumeorders" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="ConsumeOrders" EntitySet="ConsumeOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_CONSUMEO_REFERENCE_USERS" Association="Self.FK_CONSUMEO_REFERENCE_USERS">
-            <End Role="users" EntitySet="users" />
-            <End Role="consumeorders" EntitySet="consumeorders" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ConsumeOrders" EntitySet="ConsumeOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_EXCHANGG_REFERENCE_SHOPS" Association="Self.FK_EXCHANGG_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="exchanggifts" EntitySet="exchanggifts" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="ExchangGifts" EntitySet="ExchangGifts" />
           </AssociationSet>
           <AssociationSet Name="FK_EXCHANGL_REFERENCE_SHOPS" Association="Self.FK_EXCHANGL_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="exchanglogs" EntitySet="exchanglogs" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="ExchangLogs" EntitySet="ExchangLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_EXCHANGL_REFERENCE_USERS" Association="Self.FK_EXCHANGL_REFERENCE_USERS">
-            <End Role="users" EntitySet="users" />
-            <End Role="exchanglogs" EntitySet="exchanglogs" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ExchangLogs" EntitySet="ExchangLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_MEMCARDS_REFERENCE_CARDLEVE" Association="Self.FK_MEMCARDS_REFERENCE_CARDLEVE">
-            <End Role="cardlevels" EntitySet="cardlevels" />
-            <End Role="memcards" EntitySet="memcards" />
+            <End Role="CardLevels" EntitySet="CardLevels" />
+            <End Role="MemCards" EntitySet="MemCards" />
           </AssociationSet>
           <AssociationSet Name="FK_MEMCARDS_REFERENCE_SHOPS" Association="Self.FK_MEMCARDS_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="memcards" EntitySet="memcards" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="MemCards" EntitySet="MemCards" />
           </AssociationSet>
           <AssociationSet Name="FK_SYSLOGS_REFERENCE_USERS" Association="Self.FK_SYSLOGS_REFERENCE_USERS">
-            <End Role="users" EntitySet="users" />
-            <End Role="syslogs" EntitySet="syslogs" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SysLogs" EntitySet="SysLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_TRANSFER_REFERENCE_SHOPS" Association="Self.FK_TRANSFER_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="transferlogs" EntitySet="transferlogs" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="TransferLogs" EntitySet="TransferLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_TRANSFER_REFERENCE_USERS" Association="Self.FK_TRANSFER_REFERENCE_USERS">
-            <End Role="users" EntitySet="users" />
-            <End Role="transferlogs" EntitySet="transferlogs" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TransferLogs" EntitySet="TransferLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_USERS_REFERENCE_SHOPS" Association="Self.FK_USERS_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="users" EntitySet="users" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="cardlevels">
+      <Schema Namespace="UPMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CardLevels">
           <Key>
             <PropertyRef Name="CL_ID" />
           </Key>
-          <Property Name="CL_ID" Type="Int32" Nullable="false" />
-          <Property Name="CL_LevelName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CL_NeedPoint" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CL_LevelName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CL_NeedPoint" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CL_Point" Type="Double" />
           <Property Name="CL_Percent" Type="Double" />
-          <NavigationProperty Name="memcards" Relationship="Self.FK_MEMCARDS_REFERENCE_CARDLEVE" FromRole="cardlevels" ToRole="memcards" />
+          <NavigationProperty Name="MemCards" Relationship="Self.FK_MEMCARDS_REFERENCE_CARDLEVE" FromRole="CardLevels" ToRole="MemCards" />
         </EntityType>
-        <EntityType Name="categories">
+        <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="C_Category" />
           </Key>
           <Property Name="C_Category" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="C_Illustration" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="C_IsShow" Type="SByte" />
-          <NavigationProperty Name="categoryitems" Relationship="Self.FK_CATEGORY_REFERENCE_CATEGORI" FromRole="categories" ToRole="categoryitems" />
+          <Property Name="C_IsShow" Type="Boolean" />
+          <NavigationProperty Name="CategoryItems" Relationship="Self.FK_CATEGORY_REFERENCE_CATEGORI" FromRole="Categories" ToRole="CategoryItems" />
         </EntityType>
-        <EntityType Name="categoryitems">
+        <EntityType Name="CategoryItems">
           <Key>
             <PropertyRef Name="CI_KeyID" />
           </Key>
@@ -403,365 +403,365 @@
           <Property Name="C_Category" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CI_ID" Type="Int32" />
           <Property Name="CI_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="categories" Relationship="Self.FK_CATEGORY_REFERENCE_CATEGORI" FromRole="categoryitems" ToRole="categories" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_CATEGORY_REFERENCE_CATEGORI" FromRole="CategoryItems" ToRole="Categories" />
         </EntityType>
-        <EntityType Name="consumeorders">
+        <EntityType Name="ConsumeOrders">
           <Key>
             <PropertyRef Name="CO_ID" />
           </Key>
-          <Property Name="CO_ID" Type="Int32" Nullable="false" />
+          <Property Name="CO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="S_ID" Type="Int32" />
           <Property Name="U_ID" Type="Int32" />
-          <Property Name="CO_OrderCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CO_OrderType" Type="SByte" />
+          <Property Name="CO_OrderCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CO_OrderType" Type="Byte" />
           <Property Name="MC_ID" Type="Int32" />
-          <Property Name="MC_CardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MC_CardID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EG_ID" Type="Int32" />
           <Property Name="CO_TotalMoney" Type="Single" />
           <Property Name="CO_DiscountMoney" Type="Single" />
           <Property Name="CO_GavePoint" Type="Int32" />
           <Property Name="CO_Recash" Type="Single" />
-          <Property Name="CO_Remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="CO_CreateTime" Type="DateTime" />
-          <NavigationProperty Name="shops" Relationship="Self.FK_CONSUMEO_REFERENCE_SHOPS" FromRole="consumeorders" ToRole="shops" />
-          <NavigationProperty Name="users" Relationship="Self.FK_CONSUMEO_REFERENCE_USERS" FromRole="consumeorders" ToRole="users" />
+          <Property Name="CO_Remark" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CO_CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_CONSUMEO_REFERENCE_SHOPS" FromRole="ConsumeOrders" ToRole="Shops" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_CONSUMEO_REFERENCE_USERS" FromRole="ConsumeOrders" ToRole="Users" />
         </EntityType>
-        <EntityType Name="exchanggifts">
+        <EntityType Name="ExchangGifts">
           <Key>
             <PropertyRef Name="EG_ID" />
           </Key>
-          <Property Name="EG_ID" Type="Int32" Nullable="false" />
+          <Property Name="EG_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="S_ID" Type="Int32" />
-          <Property Name="EG_GiftCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="EG_GiftName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="EG_Photo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EG_GiftCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EG_GiftName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EG_Photo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="EG_Point" Type="Int32" />
           <Property Name="EG_Number" Type="Int32" />
           <Property Name="EG_ExchangNum" Type="Int32" />
-          <Property Name="EG_Remark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="shops" Relationship="Self.FK_EXCHANGG_REFERENCE_SHOPS" FromRole="exchanggifts" ToRole="shops" />
+          <Property Name="EG_Remark" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_EXCHANGG_REFERENCE_SHOPS" FromRole="ExchangGifts" ToRole="Shops" />
         </EntityType>
-        <EntityType Name="exchanglogs">
+        <EntityType Name="ExchangLogs">
           <Key>
             <PropertyRef Name="EL_ID" />
           </Key>
-          <Property Name="EL_ID" Type="Int32" Nullable="false" />
+          <Property Name="EL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="S_ID" Type="Int32" />
           <Property Name="U_ID" Type="Int32" />
           <Property Name="MC_ID" Type="Int32" />
-          <Property Name="MC_CardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MC_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MC_CardID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MC_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="EG_ID" Type="Int32" />
-          <Property Name="EG_GiftCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EG_GiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EG_GiftCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EG_GiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EL_Number" Type="Int32" />
           <Property Name="EL_Point" Type="Int32" />
-          <Property Name="EL_CreateTime" Type="DateTime" />
-          <NavigationProperty Name="shops" Relationship="Self.FK_EXCHANGL_REFERENCE_SHOPS" FromRole="exchanglogs" ToRole="shops" />
-          <NavigationProperty Name="users" Relationship="Self.FK_EXCHANGL_REFERENCE_USERS" FromRole="exchanglogs" ToRole="users" />
+          <Property Name="EL_CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_EXCHANGL_REFERENCE_SHOPS" FromRole="ExchangLogs" ToRole="Shops" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_EXCHANGL_REFERENCE_USERS" FromRole="ExchangLogs" ToRole="Users" />
         </EntityType>
-        <EntityType Name="memcards">
+        <EntityType Name="MemCards">
           <Key>
             <PropertyRef Name="MC_ID" />
           </Key>
-          <Property Name="MC_ID" Type="Int32" Nullable="false" />
+          <Property Name="MC_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CL_ID" Type="Int32" />
           <Property Name="S_ID" Type="Int32" />
-          <Property Name="MC_CardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MC_Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="MC_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MC_CardID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MC_Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MC_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="MC_Sex" Type="Int32" />
-          <Property Name="MC_Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MC_Photo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MC_Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MC_Photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MC_Birthday_Month" Type="Int32" />
           <Property Name="MC_Birthday_Day" Type="Int32" />
-          <Property Name="MC_BirthdayType" Type="SByte" />
-          <Property Name="MC_IsPast" Type="SByte" />
-          <Property Name="MC_PastTime" Type="DateTime" />
+          <Property Name="MC_BirthdayType" Type="Byte" />
+          <Property Name="MC_IsPast" Type="Boolean" />
+          <Property Name="MC_PastTime" Type="DateTime" Precision="3" />
           <Property Name="MC_Point" Type="Int32" />
           <Property Name="MC_Money" Type="Single" />
           <Property Name="MC_TotalMoney" Type="Single" />
           <Property Name="MC_TotalCount" Type="Int32" />
           <Property Name="MC_OverCount" Type="Int32" />
           <Property Name="MC_State" Type="Int32" />
-          <Property Name="MC_IsPointAuto" Type="SByte" />
+          <Property Name="MC_IsPointAuto" Type="Boolean" />
           <Property Name="MC_RefererID" Type="Int32" />
-          <Property Name="MC_RefererCard" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MC_RefererName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="MC_CreateTime" Type="DateTime" />
-          <NavigationProperty Name="cardlevels" Relationship="Self.FK_MEMCARDS_REFERENCE_CARDLEVE" FromRole="memcards" ToRole="cardlevels" />
-          <NavigationProperty Name="shops" Relationship="Self.FK_MEMCARDS_REFERENCE_SHOPS" FromRole="memcards" ToRole="shops" />
+          <Property Name="MC_RefererCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MC_RefererName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MC_CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CardLevels" Relationship="Self.FK_MEMCARDS_REFERENCE_CARDLEVE" FromRole="MemCards" ToRole="CardLevels" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_MEMCARDS_REFERENCE_SHOPS" FromRole="MemCards" ToRole="Shops" />
         </EntityType>
-        <EntityType Name="shops">
+        <EntityType Name="Shops">
           <Key>
             <PropertyRef Name="S_ID" />
           </Key>
-          <Property Name="S_ID" Type="Int32" Nullable="false" />
+          <Property Name="S_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="S_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="S_Category" Type="Int32" />
           <Property Name="S_ContactName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="S_ContactTel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="S_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="S_Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="S_IsHasSetAdmin" Type="SByte" />
-          <Property Name="S_CreateTime" Type="DateTime" />
-          <NavigationProperty Name="consumeorders" Relationship="Self.FK_CONSUMEO_REFERENCE_SHOPS" FromRole="shops" ToRole="consumeorders" />
-          <NavigationProperty Name="exchanggifts" Relationship="Self.FK_EXCHANGG_REFERENCE_SHOPS" FromRole="shops" ToRole="exchanggifts" />
-          <NavigationProperty Name="exchanglogs" Relationship="Self.FK_EXCHANGL_REFERENCE_SHOPS" FromRole="shops" ToRole="exchanglogs" />
-          <NavigationProperty Name="memcards" Relationship="Self.FK_MEMCARDS_REFERENCE_SHOPS" FromRole="shops" ToRole="memcards" />
-          <NavigationProperty Name="transferlogs" Relationship="Self.FK_TRANSFER_REFERENCE_SHOPS" FromRole="shops" ToRole="transferlogs" />
-          <NavigationProperty Name="users" Relationship="Self.FK_USERS_REFERENCE_SHOPS" FromRole="shops" ToRole="users" />
+          <Property Name="S_IsHasSetAdmin" Type="Boolean" />
+          <Property Name="S_CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ConsumeOrders" Relationship="Self.FK_CONSUMEO_REFERENCE_SHOPS" FromRole="Shops" ToRole="ConsumeOrders" />
+          <NavigationProperty Name="ExchangGifts" Relationship="Self.FK_EXCHANGG_REFERENCE_SHOPS" FromRole="Shops" ToRole="ExchangGifts" />
+          <NavigationProperty Name="ExchangLogs" Relationship="Self.FK_EXCHANGL_REFERENCE_SHOPS" FromRole="Shops" ToRole="ExchangLogs" />
+          <NavigationProperty Name="MemCards" Relationship="Self.FK_MEMCARDS_REFERENCE_SHOPS" FromRole="Shops" ToRole="MemCards" />
+          <NavigationProperty Name="TransferLogs" Relationship="Self.FK_TRANSFER_REFERENCE_SHOPS" FromRole="Shops" ToRole="TransferLogs" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_USERS_REFERENCE_SHOPS" FromRole="Shops" ToRole="Users" />
         </EntityType>
-        <EntityType Name="syslogs">
+        <EntityType Name="SysLogs">
           <Key>
             <PropertyRef Name="SL_ID" />
           </Key>
-          <Property Name="SL_ID" Type="Int32" Nullable="false" />
+          <Property Name="SL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="U_ID" Type="Int32" />
-          <Property Name="SL_Module" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="SL_Details" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="SL_CreateTime" Type="DateTime" />
-          <NavigationProperty Name="users" Relationship="Self.FK_SYSLOGS_REFERENCE_USERS" FromRole="syslogs" ToRole="users" />
+          <Property Name="SL_Module" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SL_Details" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SL_CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_SYSLOGS_REFERENCE_USERS" FromRole="SysLogs" ToRole="Users" />
         </EntityType>
-        <EntityType Name="transferlogs">
+        <EntityType Name="TransferLogs">
           <Key>
             <PropertyRef Name="TL_ID" />
           </Key>
-          <Property Name="TL_ID" Type="Int32" Nullable="false" />
+          <Property Name="TL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="S_ID" Type="Int32" />
           <Property Name="U_ID" Type="Int32" />
           <Property Name="TL_FromMC_ID" Type="Int32" />
-          <Property Name="TL_FromMC_CardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TL_FromMC_CardID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TL_ToMC_ID" Type="Int32" />
-          <Property Name="TL_ToMC_CardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TL_TransferMoney" Type="Decimal" />
+          <Property Name="TL_ToMC_CardID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TL_TransferMoney" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TL_Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="TL_CreateTime" Type="DateTime" />
-          <NavigationProperty Name="shops" Relationship="Self.FK_TRANSFER_REFERENCE_SHOPS" FromRole="transferlogs" ToRole="shops" />
-          <NavigationProperty Name="users" Relationship="Self.FK_TRANSFER_REFERENCE_USERS" FromRole="transferlogs" ToRole="users" />
+          <Property Name="TL_CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_TRANSFER_REFERENCE_SHOPS" FromRole="TransferLogs" ToRole="Shops" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_TRANSFER_REFERENCE_USERS" FromRole="TransferLogs" ToRole="Users" />
         </EntityType>
-        <EntityType Name="users">
+        <EntityType Name="Users">
           <Key>
             <PropertyRef Name="U_ID" />
           </Key>
-          <Property Name="U_ID" Type="Int32" Nullable="false" />
+          <Property Name="U_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="S_ID" Type="Int32" />
-          <Property Name="U_LoginName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="U_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="U_RealName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="U_Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="U_Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="U_LoginName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="U_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="U_RealName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="U_Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="U_Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="U_Role" Type="Int32" />
-          <Property Name="U_CanDelete" Type="SByte" />
-          <NavigationProperty Name="consumeorders" Relationship="Self.FK_CONSUMEO_REFERENCE_USERS" FromRole="users" ToRole="consumeorders" />
-          <NavigationProperty Name="exchanglogs" Relationship="Self.FK_EXCHANGL_REFERENCE_USERS" FromRole="users" ToRole="exchanglogs" />
-          <NavigationProperty Name="shops" Relationship="Self.FK_USERS_REFERENCE_SHOPS" FromRole="users" ToRole="shops" />
-          <NavigationProperty Name="syslogs" Relationship="Self.FK_SYSLOGS_REFERENCE_USERS" FromRole="users" ToRole="syslogs" />
-          <NavigationProperty Name="transferlogs" Relationship="Self.FK_TRANSFER_REFERENCE_USERS" FromRole="users" ToRole="transferlogs" />
+          <Property Name="U_CanDelete" Type="Boolean" />
+          <NavigationProperty Name="ConsumeOrders" Relationship="Self.FK_CONSUMEO_REFERENCE_USERS" FromRole="Users" ToRole="ConsumeOrders" />
+          <NavigationProperty Name="ExchangLogs" Relationship="Self.FK_EXCHANGL_REFERENCE_USERS" FromRole="Users" ToRole="ExchangLogs" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_USERS_REFERENCE_SHOPS" FromRole="Users" ToRole="Shops" />
+          <NavigationProperty Name="SysLogs" Relationship="Self.FK_SYSLOGS_REFERENCE_USERS" FromRole="Users" ToRole="SysLogs" />
+          <NavigationProperty Name="TransferLogs" Relationship="Self.FK_TRANSFER_REFERENCE_USERS" FromRole="Users" ToRole="TransferLogs" />
         </EntityType>
         <Association Name="FK_MEMCARDS_REFERENCE_CARDLEVE">
-          <End Role="cardlevels" Type="Self.cardlevels" Multiplicity="0..1" />
-          <End Role="memcards" Type="Self.memcards" Multiplicity="*" />
+          <End Role="CardLevels" Type="Self.CardLevels" Multiplicity="0..1" />
+          <End Role="MemCards" Type="Self.MemCards" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="cardlevels">
+            <Principal Role="CardLevels">
               <PropertyRef Name="CL_ID" />
             </Principal>
-            <Dependent Role="memcards">
+            <Dependent Role="MemCards">
               <PropertyRef Name="CL_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CATEGORY_REFERENCE_CATEGORI">
-          <End Role="categories" Type="Self.categories" Multiplicity="0..1" />
-          <End Role="categoryitems" Type="Self.categoryitems" Multiplicity="*" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="CategoryItems" Type="Self.CategoryItems" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="categories">
+            <Principal Role="Categories">
               <PropertyRef Name="C_Category" />
             </Principal>
-            <Dependent Role="categoryitems">
+            <Dependent Role="CategoryItems">
               <PropertyRef Name="C_Category" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CONSUMEO_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="consumeorders" Type="Self.consumeorders" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="ConsumeOrders" Type="Self.ConsumeOrders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="consumeorders">
+            <Dependent Role="ConsumeOrders">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CONSUMEO_REFERENCE_USERS">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="consumeorders" Type="Self.consumeorders" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ConsumeOrders" Type="Self.ConsumeOrders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="Users">
               <PropertyRef Name="U_ID" />
             </Principal>
-            <Dependent Role="consumeorders">
+            <Dependent Role="ConsumeOrders">
               <PropertyRef Name="U_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EXCHANGG_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="exchanggifts" Type="Self.exchanggifts" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="ExchangGifts" Type="Self.ExchangGifts" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="exchanggifts">
+            <Dependent Role="ExchangGifts">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EXCHANGL_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="exchanglogs" Type="Self.exchanglogs" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="ExchangLogs" Type="Self.ExchangLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="exchanglogs">
+            <Dependent Role="ExchangLogs">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EXCHANGL_REFERENCE_USERS">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="exchanglogs" Type="Self.exchanglogs" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ExchangLogs" Type="Self.ExchangLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="Users">
               <PropertyRef Name="U_ID" />
             </Principal>
-            <Dependent Role="exchanglogs">
+            <Dependent Role="ExchangLogs">
               <PropertyRef Name="U_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEMCARDS_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="memcards" Type="Self.memcards" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="MemCards" Type="Self.MemCards" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="memcards">
+            <Dependent Role="MemCards">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TRANSFER_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="transferlogs" Type="Self.transferlogs" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="TransferLogs" Type="Self.TransferLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="transferlogs">
+            <Dependent Role="TransferLogs">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USERS_REFERENCE_SHOPS">
-          <End Role="shops" Type="Self.shops" Multiplicity="0..1" />
-          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="shops">
+            <Principal Role="Shops">
               <PropertyRef Name="S_ID" />
             </Principal>
-            <Dependent Role="users">
+            <Dependent Role="Users">
               <PropertyRef Name="S_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SYSLOGS_REFERENCE_USERS">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="syslogs" Type="Self.syslogs" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="SysLogs" Type="Self.SysLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="Users">
               <PropertyRef Name="U_ID" />
             </Principal>
-            <Dependent Role="syslogs">
+            <Dependent Role="SysLogs">
               <PropertyRef Name="U_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TRANSFER_REFERENCE_USERS">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="transferlogs" Type="Self.transferlogs" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="TransferLogs" Type="Self.TransferLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="Users">
               <PropertyRef Name="U_ID" />
             </Principal>
-            <Dependent Role="transferlogs">
+            <Dependent Role="TransferLogs">
               <PropertyRef Name="U_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cardlevels" EntityType="Self.cardlevels" />
-          <EntitySet Name="categories" EntityType="Self.categories" />
-          <EntitySet Name="categoryitems" EntityType="Self.categoryitems" />
-          <EntitySet Name="consumeorders" EntityType="Self.consumeorders" />
-          <EntitySet Name="exchanggifts" EntityType="Self.exchanggifts" />
-          <EntitySet Name="exchanglogs" EntityType="Self.exchanglogs" />
-          <EntitySet Name="memcards" EntityType="Self.memcards" />
-          <EntitySet Name="shops" EntityType="Self.shops" />
-          <EntitySet Name="syslogs" EntityType="Self.syslogs" />
-          <EntitySet Name="transferlogs" EntityType="Self.transferlogs" />
-          <EntitySet Name="users" EntityType="Self.users" />
+        <EntityContainer Name="UPMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CardLevels" EntityType="Self.CardLevels" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="CategoryItems" EntityType="Self.CategoryItems" />
+          <EntitySet Name="ConsumeOrders" EntityType="Self.ConsumeOrders" />
+          <EntitySet Name="ExchangGifts" EntityType="Self.ExchangGifts" />
+          <EntitySet Name="ExchangLogs" EntityType="Self.ExchangLogs" />
+          <EntitySet Name="MemCards" EntityType="Self.MemCards" />
+          <EntitySet Name="Shops" EntityType="Self.Shops" />
+          <EntitySet Name="SysLogs" EntityType="Self.SysLogs" />
+          <EntitySet Name="TransferLogs" EntityType="Self.TransferLogs" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_MEMCARDS_REFERENCE_CARDLEVE" Association="Self.FK_MEMCARDS_REFERENCE_CARDLEVE">
-            <End Role="cardlevels" EntitySet="cardlevels" />
-            <End Role="memcards" EntitySet="memcards" />
+            <End Role="CardLevels" EntitySet="CardLevels" />
+            <End Role="MemCards" EntitySet="MemCards" />
           </AssociationSet>
           <AssociationSet Name="FK_CATEGORY_REFERENCE_CATEGORI" Association="Self.FK_CATEGORY_REFERENCE_CATEGORI">
-            <End Role="categories" EntitySet="categories" />
-            <End Role="categoryitems" EntitySet="categoryitems" />
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="CategoryItems" EntitySet="CategoryItems" />
           </AssociationSet>
           <AssociationSet Name="FK_CONSUMEO_REFERENCE_SHOPS" Association="Self.FK_CONSUMEO_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="consumeorders" EntitySet="consumeorders" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="ConsumeOrders" EntitySet="ConsumeOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_CONSUMEO_REFERENCE_USERS" Association="Self.FK_CONSUMEO_REFERENCE_USERS">
-            <End Role="users" EntitySet="users" />
-            <End Role="consumeorders" EntitySet="consumeorders" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ConsumeOrders" EntitySet="ConsumeOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_EXCHANGG_REFERENCE_SHOPS" Association="Self.FK_EXCHANGG_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="exchanggifts" EntitySet="exchanggifts" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="ExchangGifts" EntitySet="ExchangGifts" />
           </AssociationSet>
           <AssociationSet Name="FK_EXCHANGL_REFERENCE_SHOPS" Association="Self.FK_EXCHANGL_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="exchanglogs" EntitySet="exchanglogs" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="ExchangLogs" EntitySet="ExchangLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_EXCHANGL_REFERENCE_USERS" Association="Self.FK_EXCHANGL_REFERENCE_USERS">
-            <End Role="users" EntitySet="users" />
-            <End Role="exchanglogs" EntitySet="exchanglogs" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ExchangLogs" EntitySet="ExchangLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_MEMCARDS_REFERENCE_SHOPS" Association="Self.FK_MEMCARDS_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="memcards" EntitySet="memcards" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="MemCards" EntitySet="MemCards" />
           </AssociationSet>
           <AssociationSet Name="FK_TRANSFER_REFERENCE_SHOPS" Association="Self.FK_TRANSFER_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="transferlogs" EntitySet="transferlogs" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="TransferLogs" EntitySet="TransferLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_USERS_REFERENCE_SHOPS" Association="Self.FK_USERS_REFERENCE_SHOPS">
-            <End Role="shops" EntitySet="shops" />
-            <End Role="users" EntitySet="users" />
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_SYSLOGS_REFERENCE_USERS" Association="Self.FK_SYSLOGS_REFERENCE_USERS">
-            <End Role="users" EntitySet="users" />
-            <End Role="syslogs" EntitySet="syslogs" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SysLogs" EntitySet="SysLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_TRANSFER_REFERENCE_USERS" Association="Self.FK_TRANSFER_REFERENCE_USERS">
-            <End Role="users" EntitySet="users" />
-            <End Role="transferlogs" EntitySet="transferlogs" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TransferLogs" EntitySet="TransferLogs" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -769,10 +769,10 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
-          <EntitySetMapping Name="cardlevels">
-            <EntityTypeMapping TypeName="DBModel.cardlevels">
-              <MappingFragment StoreEntitySet="cardlevels">
+        <EntityContainerMapping StorageEntityContainer="UPMSModelStoreContainer" CdmEntityContainer="UPMSEntities">
+          <EntitySetMapping Name="CardLevels">
+            <EntityTypeMapping TypeName="UPMSModel.CardLevels">
+              <MappingFragment StoreEntitySet="CardLevels">
                 <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
                 <ScalarProperty Name="CL_LevelName" ColumnName="CL_LevelName" />
                 <ScalarProperty Name="CL_NeedPoint" ColumnName="CL_NeedPoint" />
@@ -781,18 +781,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="categories">
-            <EntityTypeMapping TypeName="DBModel.categories">
-              <MappingFragment StoreEntitySet="categories">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="UPMSModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
                 <ScalarProperty Name="C_Category" ColumnName="C_Category" />
                 <ScalarProperty Name="C_Illustration" ColumnName="C_Illustration" />
                 <ScalarProperty Name="C_IsShow" ColumnName="C_IsShow" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="categoryitems">
-            <EntityTypeMapping TypeName="DBModel.categoryitems">
-              <MappingFragment StoreEntitySet="categoryitems">
+          <EntitySetMapping Name="CategoryItems">
+            <EntityTypeMapping TypeName="UPMSModel.CategoryItems">
+              <MappingFragment StoreEntitySet="CategoryItems">
                 <ScalarProperty Name="CI_KeyID" ColumnName="CI_KeyID" />
                 <ScalarProperty Name="C_Category" ColumnName="C_Category" />
                 <ScalarProperty Name="CI_ID" ColumnName="CI_ID" />
@@ -800,9 +800,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="consumeorders">
-            <EntityTypeMapping TypeName="DBModel.consumeorders">
-              <MappingFragment StoreEntitySet="consumeorders">
+          <EntitySetMapping Name="ConsumeOrders">
+            <EntityTypeMapping TypeName="UPMSModel.ConsumeOrders">
+              <MappingFragment StoreEntitySet="ConsumeOrders">
                 <ScalarProperty Name="CO_ID" ColumnName="CO_ID" />
                 <ScalarProperty Name="S_ID" ColumnName="S_ID" />
                 <ScalarProperty Name="U_ID" ColumnName="U_ID" />
@@ -820,9 +820,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="exchanggifts">
-            <EntityTypeMapping TypeName="DBModel.exchanggifts">
-              <MappingFragment StoreEntitySet="exchanggifts">
+          <EntitySetMapping Name="ExchangGifts">
+            <EntityTypeMapping TypeName="UPMSModel.ExchangGifts">
+              <MappingFragment StoreEntitySet="ExchangGifts">
                 <ScalarProperty Name="EG_ID" ColumnName="EG_ID" />
                 <ScalarProperty Name="S_ID" ColumnName="S_ID" />
                 <ScalarProperty Name="EG_GiftCode" ColumnName="EG_GiftCode" />
@@ -835,9 +835,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="exchanglogs">
-            <EntityTypeMapping TypeName="DBModel.exchanglogs">
-              <MappingFragment StoreEntitySet="exchanglogs">
+          <EntitySetMapping Name="ExchangLogs">
+            <EntityTypeMapping TypeName="UPMSModel.ExchangLogs">
+              <MappingFragment StoreEntitySet="ExchangLogs">
                 <ScalarProperty Name="EL_ID" ColumnName="EL_ID" />
                 <ScalarProperty Name="S_ID" ColumnName="S_ID" />
                 <ScalarProperty Name="U_ID" ColumnName="U_ID" />
@@ -853,9 +853,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="memcards">
-            <EntityTypeMapping TypeName="DBModel.memcards">
-              <MappingFragment StoreEntitySet="memcards">
+          <EntitySetMapping Name="MemCards">
+            <EntityTypeMapping TypeName="UPMSModel.MemCards">
+              <MappingFragment StoreEntitySet="MemCards">
                 <ScalarProperty Name="MC_ID" ColumnName="MC_ID" />
                 <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
                 <ScalarProperty Name="S_ID" ColumnName="S_ID" />
@@ -884,9 +884,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="shops">
-            <EntityTypeMapping TypeName="DBModel.shops">
-              <MappingFragment StoreEntitySet="shops">
+          <EntitySetMapping Name="Shops">
+            <EntityTypeMapping TypeName="UPMSModel.Shops">
+              <MappingFragment StoreEntitySet="Shops">
                 <ScalarProperty Name="S_ID" ColumnName="S_ID" />
                 <ScalarProperty Name="S_Name" ColumnName="S_Name" />
                 <ScalarProperty Name="S_Category" ColumnName="S_Category" />
@@ -899,9 +899,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="syslogs">
-            <EntityTypeMapping TypeName="DBModel.syslogs">
-              <MappingFragment StoreEntitySet="syslogs">
+          <EntitySetMapping Name="SysLogs">
+            <EntityTypeMapping TypeName="UPMSModel.SysLogs">
+              <MappingFragment StoreEntitySet="SysLogs">
                 <ScalarProperty Name="SL_ID" ColumnName="SL_ID" />
                 <ScalarProperty Name="U_ID" ColumnName="U_ID" />
                 <ScalarProperty Name="SL_Module" ColumnName="SL_Module" />
@@ -910,9 +910,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="transferlogs">
-            <EntityTypeMapping TypeName="DBModel.transferlogs">
-              <MappingFragment StoreEntitySet="transferlogs">
+          <EntitySetMapping Name="TransferLogs">
+            <EntityTypeMapping TypeName="UPMSModel.TransferLogs">
+              <MappingFragment StoreEntitySet="TransferLogs">
                 <ScalarProperty Name="TL_ID" ColumnName="TL_ID" />
                 <ScalarProperty Name="S_ID" ColumnName="S_ID" />
                 <ScalarProperty Name="U_ID" ColumnName="U_ID" />
@@ -926,9 +926,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="DBModel.users">
-              <MappingFragment StoreEntitySet="users">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="UPMSModel.Users">
+              <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="U_ID" ColumnName="U_ID" />
                 <ScalarProperty Name="S_ID" ColumnName="S_ID" />
                 <ScalarProperty Name="U_LoginName" ColumnName="U_LoginName" />

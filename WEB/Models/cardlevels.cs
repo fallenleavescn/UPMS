@@ -12,12 +12,12 @@ namespace WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class cardlevels
+    public partial class CardLevels
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public cardlevels()
+        public CardLevels()
         {
-            this.memcards = new HashSet<memcards>();
+            this.MemCards = new HashSet<MemCards>();
         }
     
         public int CL_ID { get; set; }
@@ -27,6 +27,6 @@ namespace WEB.Models
         public Nullable<double> CL_Percent { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<memcards> memcards { get; set; }
+        public virtual ICollection<MemCards> MemCards { get; set; }
     }
 }
