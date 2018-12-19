@@ -517,6 +517,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\GiftController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\UserLevelController.cs" />
@@ -590,6 +591,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\UserLevel\Index.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Gift\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

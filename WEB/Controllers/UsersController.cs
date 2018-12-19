@@ -13,6 +13,22 @@ namespace WEB.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            using(UPMSEntities db = new UPMSEntities())
+            {
+                var linqResult = from C in db.CategoryItems
+                             where C.C_Category == "U_Role" && C.CI_ID != 1
+                             select new
+                             {
+                                 RoleName = C.CI_Name
+                             };
+
+                List<string> RoleList = new List<string>();
+                foreach (var row in linqResult)
+                    RoleList.Add(row.RoleName);
+
+                ViewBag.RoleList = RoleList;
+            }
+
             return View();
         }
 
@@ -21,8 +37,10 @@ namespace WEB.Controllers
         {
             using (UPMSEntities db = new UPMSEntities())
             {
-                var linqResult = from U in db.Users
-                             where (string.IsNullOrEmpty(LoginName) || U.U_LoginName.Contains(LoginName))
+                var linqResult = from U in db.Users join C in db.CategoryItems
+                                 on U.U_Role equals C.CI_ID
+                                 where C.C_Category == "U_Role"
+                             && (string.IsNullOrEmpty(LoginName) || U.U_LoginName.Contains(LoginName))
                              && (string.IsNullOrEmpty(RealName) || U.U_RealName.Contains(RealName))
                              && (string.IsNullOrEmpty(Phone) || U.U_Telephone.Contains(Phone))
                              && U.U_Role != 1 
@@ -34,7 +52,7 @@ namespace WEB.Controllers
                                  RealName = U.U_RealName,
                                  Sex = U.U_Sex,
                                  Phone = U.U_Telephone,
-                                 Role = U.U_Role,
+                                 RoleName = C.CI_Name,
                                  CanDelete = U.U_CanDelete
                              };
 
@@ -48,10 +66,12 @@ namespace WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddUser(string LoginName,string Password,string RealName,string Sex,string Phone, int Role, bool CanDelete)
+        public ActionResult AddUser(string LoginName,string Password,string RealName,string Sex,string Phone, string RoleName, bool CanDelete)
         {
             using(UPMSEntities db = new UPMSEntities())
             {
+                var cateLinq = from C in db.CategoryItems where C.CI_Name == RoleName select new { RoleID = C.CI_ID };
+
                 Users user = new Users();
                 {
                     user.U_LoginName = LoginName;
@@ -59,7 +79,7 @@ namespace WEB.Controllers
                     user.U_RealName = RealName;
                     user.U_Sex = Sex;
                     user.U_Telephone = Phone;
-                    user.U_Role = Role;
+                    user.U_Role = cateLinq.FirstOrDefault().RoleID;
                     user.U_CanDelete = CanDelete;
                 }
                 db.Users.Add(user);
@@ -80,10 +100,12 @@ namespace WEB.Controllers
             }
         }
         [HttpPost]
-        public ActionResult UpdateUser(int ID, string LoginName, string Password, string RealName, string Sex, string Phone, int Role, bool CanDelete)
+        public ActionResult UpdateUser(int ID, string LoginName, string Password, string RealName, string Sex, string Phone, string RoleName, bool CanDelete)
         {
             using (UPMSEntities db = new UPMSEntities())
             {
+                var cateLinq = from C in db.CategoryItems where C.CI_Name == RoleName select new { RoleID = C.CI_ID };
+
                 Users user = new Users();
                 {
                     user.U_ID = ID;
@@ -92,7 +114,7 @@ namespace WEB.Controllers
                     user.U_RealName = RealName;
                     user.U_Sex = Sex;
                     user.U_Telephone = Phone;
-                    user.U_Role = Role;
+                    user.U_Role = cateLinq.FirstOrDefault().RoleID;
                     user.U_CanDelete = CanDelete;
                 }
                 db.Entry<Users>(user).State = EntityState.Modified;
