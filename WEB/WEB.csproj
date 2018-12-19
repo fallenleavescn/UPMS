@@ -388,6 +388,8 @@
     <Content Include="Content\css\easyui\metro\tree.css" />
     <Content Include="Content\css\easyui\metro\validatebox.css" />
     <Content Include="Content\css\easyui\metro\window.css" />
+    <Content Include="Content\css\Ecalendar\reset.css" />
+    <Content Include="Content\css\Ecalendar\style.css" />
     <Content Include="Content\css\images\btn.png" />
     <Content Include="Content\css\images\cloud.jpg" />
     <Content Include="Content\css\images\cloud.png" />
@@ -478,6 +480,7 @@
     <Content Include="Content\Scripts\easyui\jquery-1.11.1.js" />
     <Content Include="Content\Scripts\easyui\jquery-easyui-min.js" />
     <None Include="Content\Scripts\jquery-1.7.1-vsdoc.js" />
+    <Content Include="Content\Scripts\Ecalendar.jquery.min.js" />
     <Content Include="Content\Scripts\jquery-1.7.1.js" />
     <Content Include="Content\Scripts\jquery-1.7.1.min.js" />
     <Content Include="Content\Scripts\jquery-ui-1.8.20.js" />
@@ -514,6 +517,8 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Controllers\UserLevelController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -581,6 +586,8 @@
     <Content Include="Views\System\Index.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\UserLevel\Index.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

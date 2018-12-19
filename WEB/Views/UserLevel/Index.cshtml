@@ -1,0 +1,191 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>会员等级管理</title>
+    <link href="~/Content/css/easyui/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/easyui/icon.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/Scripts/easyui/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/easyui/jquery-easyui-min.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/easyui/easyui-lang-zh_CN.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/ToolKit.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            GetUserList();
+        });
+        //修改温馨提示
+        function tip() {
+            $("#tip").dialog({
+                title: "温馨提示",
+                width: 300,
+                height: 150,
+                closed: false,
+                modal: true //定义窗口是不是模态（modal）窗口。
+            });
+        }
+        function GetUserList() {
+            var param = {};
+            param.LevelName = $("#txtSearch").val();
+            param.r = Math.random();
+            $("#LevelInfo").datagrid({
+                url: "/UserLevel/GetLevelList",
+                method: 'post',
+                pagination: true,
+                pageSize: 10,
+                pageList: [10, 30, 50],
+                singleSelect: true,//单次选中
+                queryParams: param,
+                fitColumns: true,
+                columns: [[
+                    { title: "等级编号", field: "ID", width: 20 },
+                    { title: "等级名称", field: "LevelName", width: 100 },
+                    { title: "所需最大积分", field: "NeedPoint", width: 100 },
+                    { title: "扣分比例", field: "Point", width: 100 },
+                    { title: "折扣比例", field: "Percent", width: 100 },
+                ]]
+            });
+        }
+        function InsertBtn() {
+            var param = {};
+            $("#ID").val("");
+            $("#txt_LevelName").val("");
+            $("#txt_NeedPoint").val("");
+            $("#txt_Point").val("");
+            $("#txt_Percent").val("");
+            $("#div_Data").dialog({
+                title: "修改信息",
+                width: 500,
+                height: 250,
+                closed: false,
+                modal: true
+            });
+        }
+        function UpdateBtn() {
+            var row = $("#LevelInfo").datagrid('getSelected');
+            if (row != null) {
+                $("#div_Data").dialog({
+                    title: "修改信息",
+                    width: 500,
+                    height: 250,
+                    closed: false,
+                    modal: true
+                });
+                $("#ID").attr("value", row.ID);
+                $("#txt_LevelName").val(row.LevelName);
+                $("#txt_NeedPoint").val(row.NeedPoint);
+                $("#txt_Point").val(row.Point);
+                $("#txt_Percent").val(row.Percent);
+            } else tip();
+        }
+        function SumbitData() {
+            var param = {};
+            var ID = $.trim($("#ID").attr("value"));
+            var LevelName = $("#txt_LevelName").val();
+            var NeedPoint = $("#txt_NeedPoint").val();
+            var Point = $("#txt_Point").val();
+            var Percent = $("#txt_Percent").val();
+            if (LevelName.length > 0 && NeedPoint.length > 0 && Point.length > 0 && Percent.length > 0) {
+                param.ID = ID;
+                param.LevelName = LevelName;
+                param.NeedPoint = NeedPoint;
+                param.Point = Point;
+                param.Percent = Percent;
+                param.r = Math.random();
+                var action = (ID != "") ? "/UserLevel/UpdateLevel" : "/UserLevel/AddLevel";
+                $.post(action, param, function (result) {
+                    if (result.status == 1) {
+                        alert(result.msg);
+                        $("#div_Data").dialog("close", false);
+                        $("#LevelInfo").datagrid('reload');
+                    } else {
+                        alert(result.msg);
+                    }
+                });
+            }
+            else alert("所有项不得留空!");
+        }
+        function DeleteBtn() {
+            $("#DeleteRow").dialog({
+                title: "温馨提示",
+                width: 300,
+                height: 150,
+                closed: false,
+                modal: true //定义窗口是不是模态（modal）窗口。
+            });
+        }
+        function DeleteRow() {
+            var row = $("#LevelInfo").datagrid('getSelected');
+            if (row != null) {
+                $.post("/UserLevel/DeleteLevel", { ID: row.ID }, function (result) {
+                    if (result.status == 1) {
+                        alert(result.msg);
+                        $("#DeleteRow").dialog("close", false);
+                        $("#LevelInfo").datagrid('reload');
+                    } else {
+                        alert(result.msg);
+                    }
+                });
+            } else {
+                tip();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="tb" style="padding: 5px; height: auto">
+        <div style="margin-bottom: 5px">
+            <a href="#" class="easyui-linkbutton Insert" iconcls="icon-add" onclick="InsertBtn()">新增</a>
+            <a href="#" class="easyui-linkbutton Update" iconcls="icon-edit" onclick="UpdateBtn()">修改</a>
+            <a href="#" class="easyui-linkbutton Delete" iconcls="icon-remove" onclick="DeleteBtn()">删除</a>
+        </div>
+        <div>
+            等级名称:
+            <input id="txtSearch" style="width: 80px;">
+            <a href="#" class="easyui-linkbutton Search" iconcls="icon-search" id="btn_Select" onclick=" GetUserList()">查询</a>
+        </div>
+    </div>
+    <div id="dlg" class="easyui-dialog" data-options="modal:true,closed:true">
+        <iframe id="frm" width="99%" height="98%" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <table id="LevelInfo"></table>
+    <!-- 操作-->
+    <div id="tip" class="easyui-dialog" data-options="modal:true,closed:true" style="text-align:center">
+        <h1> 请选择需要操作的行！</h1>
+        <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick='$("#tip").dialog("close", false)'>确定</a>
+    </div>
+    <div id="DeleteRow" class="easyui-dialog" data-options="modal:true,closed:true" style="text-align:center">
+        <h1>确定要删除吗？</h1>
+        <input type="button" onclick='DeleteRow()' value="确定" />
+        <input type="button" onclick='$("#DeleteRow").dialog("close", false)' value="取消" />
+    </div>
+    <div id="div_Data" class="easyui-dialog" data-options="modal:true,closed:true,iconCls:'icon-add'">
+        <input type="hidden" id="ID" />
+        <table style="margin: 20px auto;" cellpadding="0" cellspacing="10">
+            <tr>
+                <td><input class="easyui-textbox" type="text" placeholder="请输入会员等级名称" id="txt_LevelName" style="width:300px;" /></td>
+            </tr>
+            <tr>
+                <td><input class="easyui-textbox" type="text" placeholder="请输入所需最大积分" id="txt_NeedPoint" style="width:300px;" /></td>
+            </tr>
+            <tr>
+                <td><input class="easyui-textbox" type="text" placeholder="请输入扣分比例 例如:5" id="txt_Point" style="width:300px;" /></td>
+            </tr>
+            <tr>
+                <td><input class="easyui-textbox" type="text" placeholder="请输入折扣比例 例如:0.72 代表七折" id="txt_Percent" style="width:300px;" /></td>
+            </tr>
+            <tr style="text-align:center">
+                <td colspan="2">
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="SumbitData()">确定</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick='$("#div_Data").dialog("close", false);'>取消</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

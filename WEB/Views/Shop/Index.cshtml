@@ -5,199 +5,229 @@
 }
 <html>
 <head>
-<link href="~/Content/css/easyui/default/easyui.css" rel="stylesheet" type="text/css" />
-<link href="~/Content/css/easyui/icon.css" rel="stylesheet" type="text/css" />
-<script src="~/Content/Scripts/easyui/jquery-1.11.1.js" type="text/javascript"></script>
-<script src="~/Content/Scripts/easyui/jquery-easyui-min.js" type="text/javascript"></script>
-<script src="~/Content/Scripts/easyui/easyui-lang-zh_CN.js" type="text/javascript"></script>
-<script src="~/Content/Scripts/ToolKit.js" type="text/javascript"></script>
-<script>
-    $(function () {
-        GetUserList();
-    });
-    function GetUserList() {
-        var param = {};
-        param.ShopName = $("#txtName").val();
-        param.ContactName = $("#txtContactName").val();
-        param.Address = $("#txtAddress").val();
-        param.r = Math.random();
-        $("#ShopInfo").datagrid({
-            url: "/Shop/GetShopList",
-            method: 'post',
-            pagination: true,
-            pageSize: 10,
-            pageList: [10, 30, 50],
-            singleSelect: true,//单次选中
-            queryParams: param,
-            fitColumns: true,
-            columns: [[
-                { title: "店铺编号", field: "S_ID", width: 30 },
-                { title: "店铺名称", field: "S_Name", width: 100 },
-                { title: "店铺类型", field: "CI_Name", width: 50 },
-                { title: "联系人", field: "S_ContactName", width: 40 },
-                { title: "联系电话", field: "S_ContactTel", width: 50 },
-                { title: "地址", field: "S_Address", width: 100 },
-                { title: "备注", field: "S_Remark", width: 100 },
-                {
-                    title: "是否添加管理员", field: "S_IsHasSetAdmin", width: 40, formatter: function (value, row, index) {
-                        return row.S_IsHasSetAdmin;
-                    }
-                },
-                {
-                    title: "加盟时间", field: "S_CreateTime", width: 50, formatter: function (value, row, index) {
-                        return changeDateFormat(row.S_CreateTime);
-                    }
-                }
-            ]]
+    <link href="~/Content/css/easyui/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/easyui/icon.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/Scripts/easyui/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/easyui/jquery-easyui-min.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/easyui/easyui-lang-zh_CN.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/ToolKit.js" type="text/javascript"></script>
+    <script>
+        $(function () {
+            GetUserList();
         });
-    }
-    // 转换日期格式
-    function changeDateFormat(cellval) {
-        if (cellval != null) {
-            var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
-            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-            return date.getFullYear() + "-" + month + "-" + currentDate;
+        function GetUserList() {
+            var param = {};
+            param.ShopName = $("#txtName").val();
+            param.ContactName = $("#txtContactName").val();
+            param.Address = $("#txtAddress").val();
+            param.r = Math.random();
+            $("#ShopInfo").datagrid({
+                url: "/Shop/GetShopList",
+                method: 'post',
+                pagination: true,
+                pageSize: 10,
+                pageList: [10, 30, 50],
+                singleSelect: true,//单次选中
+                queryParams: param,
+                fitColumns: true,
+                columns: [[
+                    { title: "店铺编号", field: "S_ID", width: 30 },
+                    { title: "店铺名称", field: "S_Name", width: 100 },
+                    { title: "店铺类型", field: "CI_Name", width: 50 },
+                    { title: "联系人", field: "S_ContactName", width: 40 },
+                    { title: "联系电话", field: "S_ContactTel", width: 50 },
+                    { title: "地址", field: "S_Address", width: 100 },
+                    { title: "备注", field: "S_Remark", width: 100 },
+                    {
+                        title: "是否添加管理员", field: "S_IsHasSetAdmin", width: 40, formatter: function (value, row, index) {
+                            return row.S_IsHasSetAdmin;
+                        }
+                    },
+                    {
+                        title: "加盟时间", field: "S_CreateTime", width: 50, formatter: function (value, row, index) {
+                            return changeDateFormat(row.S_CreateTime);
+                        }
+                    }
+                ]]
+            });
         }
-    }
-    //修改温馨提示
-    function tip() {
-        $("#tip").dialog({
-            title: "温馨提示",
-            width: 300,
-            height: 150,
-            closed: false,
-            modal: true //定义窗口是不是模态（modal）窗口。
-        });
-    }
-    //删除温馨提示
-    function del() {
-        $("#del").dialog({
-            title: "温馨提示",
-            width: 300,
-            height: 150,
-            closed: false,
-            modal: true //定义窗口是不是模态（modal）窗口。
-        });
-    }
-    //添加按钮
-    function InsertBtn() {
-        $("#ID").val("");
-        $("#txt_ShopName").val("");
-        $("#txt_Category").prop("selectedIndex", 0);
-        $("#txt_TellName").val("");
-        $("#txt_Phone").val("");
-        $("#txt_Address").val("");
-        $("#txt_Remark").val("");
-        //弹出窗体
-        $("#div_Add").dialog({
-            title: "添加信息",
-            width: 400,
-            height: 300,
-            closed: false,
-            buttons: '#btnSave',
-            modal: true //定义窗口是不是模态（modal）窗口。
-        });
-    }
-    //修改按钮
-    function UpdateBtn() {
-        var row = $("#ShopInfo").datagrid('getSelected');
-        if (row != null) {
-            $("#div_Add").dialog({
-                title: "修改信息",
-                width: 400,
-                height: 300,
+        // 转换日期格式
+        function changeDateFormat(cellval) {
+            if (cellval != null) {
+                var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                return date.getFullYear() + "-" + month + "-" + currentDate;
+            }
+        }
+        //修改温馨提示
+        function tip() {
+            $("#tip").dialog({
+                title: "温馨提示",
+                width: 300,
+                height: 150,
                 closed: false,
                 modal: true //定义窗口是不是模态（modal）窗口。
             });
-            $("#txt_ShopName").val(row.S_Name);
-            $("#txt_Category").prop("selectedIndex", row.CI_ID);
-            $("#txt_TellName").val(row.S_ContactName);
-            $("#txt_Phone").val(row.S_ContactTel);
-            $("#txt_Address").val(row.S_Address);
-            $("#txt_Remark").val(row.S_Reamrk);
-            $("#ID").attr("value", row.S_ID);
-        } else {
-            tip();
         }
-    }
-    //修改
-    function Edit() {
-        var param = {};
-        param.ShopName = $("#txt_ShopName").val();
-        param.Category = $("#txt_Category").val();
-        param.TellName = $("#txt_TellName").val();
-        param.Phone = $("#txt_Phone").val();
-        param.Address = $("#txt_Address").val();
-        param.Remark = $("#txt_Remark").val();
-        param.ID = $.trim($("#ID").attr("value"));
+        //删除温馨提示
+        function del() {
+            $("#del").dialog({
+                title: "温馨提示",
+                width: 300,
+                height: 150,
+                closed: false,
+                modal: true //定义窗口是不是模态（modal）窗口。
+            });
+        }
+        //添加按钮
+        function InsertBtn() {
+            $("#ID").val("");
+            $("#txt_ShopName").val("");
+            $("#txt_Category").prop("selectedIndex", 0);
+            $("#txt_TellName").val("");
+            $("#txt_Phone").val("");
+            $("#txt_Address").val("");
+            $("#txt_Remark").val("");
+            //弹出窗体
+            $("#div_Data").dialog({
+                title: "添加信息",
+                width: 300,
+                height: 350,
+                closed: false,
+                buttons: '#btnSave',
+                modal: true //定义窗口是不是模态（modal）窗口。
+            });
+        }
+        //修改按钮
+        function UpdateBtn() {
+            var row = $("#ShopInfo").datagrid('getSelected');
+            if (row != null) {
+                $("#div_Data").dialog({
+                    title: "修改信息",
+                    width: 400,
+                    height: 300,
+                    closed: false,
+                    modal: true //定义窗口是不是模态（modal）窗口。
+                });
+                $("#txt_ShopName").val(row.S_Name);
+                $("#txt_Category").prop("selectedIndex", row.CI_ID);
+                $("#txt_TellName").val(row.S_ContactName);
+                $("#txt_Phone").val(row.S_ContactTel);
+                $("#txt_Address").val(row.S_Address);
+                $("#txt_Remark").val(row.S_Reamrk);
+                $("#ID").attr("value", row.S_ID);
+            } else {
+                tip();
+            }
+        }
+        //修改
+        function Edit() {
+            var param = {};
+            param.ShopName = $("#txt_ShopName").val();
+            param.Category = $("#txt_Category").val();
+            param.TellName = $("#txt_TellName").val();
+            param.Phone = $("#txt_Phone").val();
+            param.Address = $("#txt_Address").val();
+            param.Remark = $("#txt_Remark").val();
+            param.ID = $.trim($("#ID").attr("value"));
 
-        $.post("/Shop/UpdateShop", param, function (result) {
-            if (result.status == 1) {
-                alert(result.msg);
-                $("#div_Add").dialog("close", false);
-                $("#ShopInfo").datagrid('reload');
-            } else {
-                alert(result.msg);
-            }
-        });
-    }
-    //添加
-    function Add() {
-        var param = {};
-        param.ShopName = $("#txt_ShopName").val();
-        param.Category = $("#txt_Category").val();
-        param.TellName = $("#txt_TellName").val();
-        param.Phone = $("#txt_Phone").val();
-        param.Address = $("#txt_Address").val();
-        param.Remark = $("#txt_Remark").val();
-        $.post("/Shop/AddShop", param, function (result) {
-            if (result.status == 1) {
-                alert(result.msg);
-                $("#div_Add").dialog("close", false);
-                $("#ShopInfo").datagrid('reload');
-            } else {
-                alert(result.msg);
-            }
-        });
-    }
-    //删除
-    function Delete() {
-        var row = $("#ShopInfo").datagrid('getSelected');
-        if (row != null) {
-            $.post("/Shop/DeleteShop", { ID: row.S_ID }, function (result) {
+            $.post("/Shop/UpdateShop", param, function (result) {
                 if (result.status == 1) {
                     alert(result.msg);
-                    $("#del").dialog("close", false);
+                    $("#div_Data").dialog("close", false);
                     $("#ShopInfo").datagrid('reload');
                 } else {
                     alert(result.msg);
                 }
             });
-        } else {
-            tip();
         }
-    }
-    //提交按钮
-    function Sumbit() {
-        var ShopName = $("#txt_ShopName").val();
-        var TellName = $("#txt_TellName").val();
-        var Address = $("#txt_Address").val();
-        var txt_Category = $("#txt_Category").val();
-        if (ShopName.length < 1 || TellName.length < 1 || Address.length < 1 || txt_Category == 0) {
-            alert("店铺名、类型、联系人、地址不得为空！");
-            return;
+        //添加
+        function Add() {
+            var param = {};
+            param.ShopName = $("#txt_ShopName").val();
+            param.Category = $("#txt_Category").val();
+            param.TellName = $("#txt_TellName").val();
+            param.Phone = $("#txt_Phone").val();
+            param.Address = $("#txt_Address").val();
+            param.Remark = $("#txt_Remark").val();
+            $.post("/Shop/AddShop", param, function (result) {
+                if (result.status == 1) {
+                    alert(result.msg);
+                    $("#div_Data").dialog("close", false);
+                    $("#ShopInfo").datagrid('reload');
+                } else {
+                    alert(result.msg);
+                }
+            });
         }
-        var id = $.trim($("#ID").attr("value"));
-        if (id != "") {
-            Edit();
-            $("#ShopInfo").datagrid('reload');
-        } else {
-            Add();
-            $("#ShopInfo").datagrid('reload');
+        //删除
+        function Delete() {
+            var row = $("#ShopInfo").datagrid('getSelected');
+            if (row != null) {
+                $.post("/Shop/DeleteShop", { ID: row.S_ID }, function (result) {
+                    if (result.status == 1) {
+                        alert(result.msg);
+                        $("#del").dialog("close", false);
+                        $("#ShopInfo").datagrid('reload');
+                    } else {
+                        alert(result.msg);
+                    }
+                });
+            } else {
+                tip();
+            }
         }
-    }
-</script>
+        //提交按钮
+        function Sumbit() {
+            var ShopName = $("#txt_ShopName").val();
+            var TellName = $("#txt_TellName").val();
+            var Address = $("#txt_Address").val();
+            var txt_Category = $("#txt_Category").val();
+            if (ShopName.length < 1 || TellName.length < 1 || Address.length < 1 || txt_Category == 0) {
+                alert("店铺名、类型、联系人、地址不得为空！");
+                return;
+            }
+            var id = $.trim($("#ID").attr("value"));
+            if (id != "") {
+                Edit();
+                $("#ShopInfo").datagrid('reload');
+            } else {
+                Add();
+                $("#ShopInfo").datagrid('reload');
+            }
+        }
+        function AddShopAdmin()
+        {
+            var row = $("#ShopInfo").datagrid('getSelected');
+            if (row != null) {
+                $("#AddAdmin").dialog({
+                    title: "添加信息",
+                    width: 300,
+                    height: 150,
+                    closed: false,
+                    buttons: '#btnSave',
+                    modal: true //定义窗口是不是模态（modal）窗口。
+                });
+            } else tip();
+        }
+        function UpdateShopAdmin()
+        {
+            var row = $("#ShopInfo").datagrid('getSelected');
+            var param = {};
+            param.SID = row.S_ID;
+            param.LoginName = $("#txt_LoginName").val();
+            $.post("/Shop/AddAdmin", param, function (result) {
+                if (result.status == 1) {
+                    alert(result.msg);
+                    $("#div_Data").dialog("close", false);
+                    $("#ShopInfo").datagrid('reload');
+                } else {
+                    alert(result.msg);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div id="tb" style="padding: 5px; height: auto">
@@ -205,7 +235,7 @@
             <a href="#" class="easyui-linkbutton Insert" iconcls="icon-add" onclick="InsertBtn()">新增</a>
             <a href="#" class="easyui-linkbutton Update" iconcls="icon-edit" onclick="UpdateBtn()">修改</a>
             <a href="#" class="easyui-linkbutton Delete" iconcls="icon-remove" onclick="del()">删除</a>
-            <a href="#" class="easyui-linkbutton AllotAdmin" iconcls="icon-ok">分配管理员</a>
+            <a href="#" class="easyui-linkbutton AllotAdmin" iconcls="icon-ok" onclick="AddShopAdmin()">分配管理员</a>
         </div>
         <div>
             店铺名称:
@@ -222,27 +252,30 @@
     </div>
     <table id="ShopInfo"></table>
     <!-- 操作-->
-    <div id="tip" class="easyui-dialog" data-options="modal:true,closed:true">
+    <div id="tip" class="easyui-dialog" data-options="modal:true,closed:true" style="text-align:center">
         <h1> 请选择需要操作的行！</h1>
-        <input type="button" onclick='$("#div_Add").dialog("close", false);' value="确定" />
+        <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick='$("#tip").dialog("close", false)'>确定</a>
+    </div>
+    <div id="AddAdmin" class="easyui-dialog" data-options="modal:true,closed:true" style="text-align:center">
+        <input class="easyui-textbox" type="text" id="txt_LoginName" placeholder="请输入要分配的账号登录名" style="width:200px;" /><br />
+        <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick='UpdateShopAdmin()'>分配店长的账号</a><br />
+        <label style="color:red">账号的密码默认为123456</label>
     </div>
     <div id="del" class="easyui-dialog" data-options="modal:true,closed:true" style="text-align:center">
         <h1>确定要删除吗？</h1>
         <input type="button" onclick='Delete()' value="确定" />
         <input type="button" onclick='$("#del").dialog("close", false)' value="取消" />
     </div>
-    <div id="div_Add" class="easyui-dialog" data-options="modal:true,closed:true,iconCls:'icon-add'">
+    <div id="div_Data" class="easyui-dialog" data-options="modal:true,closed:true,iconCls:'icon-add'">
         <input type="hidden" id="ID" />
         <table style="margin: 20px auto;" cellpadding="0" cellspacing="10">
             <tr>
-                <td>店铺名称</td>
-                <td><input type="text" id="txt_ShopName" /></td>
+                <td><input class="easyui-textbox" type="text" id="txt_ShopName" style="width:200px;" /></td>
             </tr>
             <tr>
-                <td>店铺类型</td>
                 <td>
-                    <select id="txt_Category">
-                        <option value="0">==请选择==</option>
+                    <select class="easyui-combobox" id="txt_Category" style="width:200px;">
+                        <option value="0">==请选择店铺类型==</option>
                         @{
                             if (listc != null)
                             {
@@ -256,25 +289,24 @@
                 </td>
             </tr>
             <tr>
-                <td>联系人</td>
-                <td><input type="text" id="txt_TellName" /></td>
+                <td><input class="easyui-textbox" type="text" id="txt_TellName" placeholder="请输入联系人名称" style="width:200px;" /></td>
             </tr>
             <tr>
-                <td>联系电话</td>
-                <td><input type="text" id="txt_Phone" /></td>
+                <td><input class="easyui-textbox" type="text" id="txt_Phone" placeholder="请输入联系人手机号码" style="width:200px;" /></td>
             </tr>
             <tr>
-                <td>店铺地址</td>
-                <td><input type="text" id="txt_Address" /></td>
+                <td><input class="easyui-textbox" type="text" placeholder="请输入店铺地址" id="txt_Address" style="width:200px;" /></td>
             </tr>
             <tr>
-                <td>备注</td>
-                <td><input type="text" id="txt_Remark" /></td>
+                <td><input class="easyui-textbox" type="text" placeholder="请输入日期" id="txt_Remark" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td><input class="easyui-datebox" id="ECalendar_date" placeholder="请点击右方选择日期" style="width:200px;"></td>
             </tr>
             <tr style="text-align:center">
                 <td colspan="2">
                     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="Sumbit()">确定</a>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick='$("#div_Add").dialog("close", false);'>取消</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick='$("#div_Data").dialog("close", false);'>取消</a>
                 </td>
             </tr>
         </table>

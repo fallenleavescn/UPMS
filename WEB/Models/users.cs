@@ -32,6 +32,7 @@ namespace WEB.Models
         public string U_Telephone { get; set; }
         public Nullable<int> U_Role { get; set; }
         public Nullable<bool> U_CanDelete { get; set; }
+        public bool U_isDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConsumeOrders> ConsumeOrders { get; set; }

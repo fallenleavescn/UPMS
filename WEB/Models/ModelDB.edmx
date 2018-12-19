@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UPMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UPMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CardLevels">
           <Key>
             <PropertyRef Name="CL_ID" />
@@ -164,6 +164,7 @@
           <Property Name="U_Telephone" Type="nvarchar" MaxLength="20" />
           <Property Name="U_Role" Type="int" />
           <Property Name="U_CanDelete" Type="bit" />
+          <Property Name="U_isDelete" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_CATEGORY_REFERENCE_CATEGORI">
           <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
@@ -370,8 +371,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UPMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -558,6 +558,7 @@
           <NavigationProperty Name="Shops" Relationship="Self.FK_USERS_REFERENCE_SHOPS" FromRole="Users" ToRole="Shops" />
           <NavigationProperty Name="SysLogs" Relationship="Self.FK_SYSLOGS_REFERENCE_USERS" FromRole="Users" ToRole="SysLogs" />
           <NavigationProperty Name="TransferLogs" Relationship="Self.FK_TRANSFER_REFERENCE_USERS" FromRole="Users" ToRole="TransferLogs" />
+          <Property Name="U_isDelete" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_MEMCARDS_REFERENCE_CARDLEVE">
           <End Role="CardLevels" Type="Self.CardLevels" Multiplicity="0..1" />
@@ -929,6 +930,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="UPMSModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="U_isDelete" ColumnName="U_isDelete" />
                 <ScalarProperty Name="U_ID" ColumnName="U_ID" />
                 <ScalarProperty Name="S_ID" ColumnName="S_ID" />
                 <ScalarProperty Name="U_LoginName" ColumnName="U_LoginName" />

@@ -28,12 +28,14 @@ namespace WEB.Controllers
                 { 
                     var UserTbl = from u in db.Users
                                   where u.U_LoginName == user.U_LoginName && u.U_Password == user.U_Password
-                                  select u.S_ID;
+                                  select u;
 
-                    if (UserTbl.FirstOrDefault().HasValue)
+                    Users userResult = UserTbl.FirstOrDefault();
+                    if (userResult.S_ID.HasValue)
                     {
                         ErrorMsg = string.Empty;
-                        Session["user"] = user;
+                        Session["user"] = userResult;
+                        
                         return RedirectToAction("index", "Admin");
                     }
                     else ErrorMsg = "账号或密码错误！";

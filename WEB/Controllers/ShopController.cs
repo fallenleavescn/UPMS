@@ -63,7 +63,7 @@ namespace WEB.Controllers
                 var data = new object { };
                 if(linqResult.Count() > 0)
                 {
-                    data = data = new { total = linqResult.Count(), rows = linqResult.OrderByDescending(x => x.S_ID).Skip((page - 1) * rows).Take(rows).ToList() };
+                   data = new { total = linqResult.Count(), rows = linqResult.OrderByDescending(x => x.S_ID).Skip((page - 1) * rows).Take(rows).ToList() };
                 }
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
@@ -84,7 +84,7 @@ namespace WEB.Controllers
                 shop.S_CreateTime = DateTime.Now;
 
                 db.Shops.Add(shop);
-                int len = db.SaveChanges();
+                int len = db.SaveChanges(); 
 
                 paramModel<int> result = new paramModel<int>();
                 if (len > 0)
@@ -156,6 +156,34 @@ namespace WEB.Controllers
                 {
                     param.status = 0;
                     param.msg = "删除失败!";
+                }
+                return Json(param, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        public ActionResult AddAdmin(int SID, string LoginName)
+        {
+            using (UPMSEntities db = new UPMSEntities())
+            {
+                Users user = new Users();
+                {
+                    user.S_ID = SID;
+                    user.U_LoginName = LoginName;
+                    user.U_Password = "123456";
+                }
+                db.Users.Add(user);
+                int result = db.SaveChanges();
+
+                paramModel<object> param = new paramModel<object>();
+                if (result > 0)
+                {
+                    param.status = 1;
+                    param.msg = "分配成功!";
+                }
+                else
+                {
+                    param.status = 0;
+                    param.msg = "分配失败!";
                 }
                 return Json(param, JsonRequestBehavior.AllowGet);
             }

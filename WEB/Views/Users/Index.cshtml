@@ -1,0 +1,228 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户管理</title>
+    <link href="~/Content/css/easyui/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/easyui/icon.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/Scripts/easyui/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/easyui/jquery-easyui-min.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/easyui/easyui-lang-zh_CN.js" type="text/javascript"></script>
+    <script src="~/Content/Scripts/ToolKit.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            GetUserList();
+        });
+        function tip() {
+            $("#tip").dialog({
+                title: "温馨提示",
+                width: 300,
+                height: 150,
+                closed: false,
+                modal: true //定义窗口是不是模态（modal）窗口。
+            });
+        }
+        function GetUserList() {
+            var param = {};
+            param.LoginName = $("#txtLoginName").val();
+            param.RealName = $("#txtRealName").val();
+            param.Phone = $("#txtPhone").val();
+            param.r = Math.random();
+            $("#UserInfo").datagrid({
+                url: "/Users/GetUserList",
+                method: 'post',
+                pagination: true,
+                pageSize: 10,
+                pageList: [10, 30, 50],
+                singleSelect: true,//单次选中
+                queryParams: param,
+                fitColumns: true,
+                columns: [[
+                    { title: "用户编号", field: "ID", width: 40 },
+                    { title: "登录名", field: "LoginName", width: 100 },
+                    { title: "真实姓名", field: "RealName", width: 100 },
+                    { title: "性别", field: "Sex", width: 100 },
+                    { title: "联系电话", field: "Phone", width: 100 },
+                    {
+                        title: "用户角色", field: "Role", width: 100, formatter: function (value, row, index) {
+                            return value == 2 ? "店长" : "业务员";
+                        }
+                    },
+                    {
+                        title: "是否可以删除", field: "CanDelete", width: 100, formatter: function (value, row, index) {
+                            return value == true ? "是" : "否";
+                        }
+                    }
+                ]]
+            });
+        }
+        function InsertBtn() {
+            var param = {};
+            $("#ID").val("");
+            $("#txt_LoginName").val("");
+            $("#txt_RealName").val("");
+            $("#txt_Phone").val("");
+            $("#div_Data").dialog({
+                title: "修改信息",
+                width: 500,
+                height: 350,
+                closed: false,
+                modal: true
+            });
+        }
+        function UpdateBtn() {
+            var row = $("#UserInfo").datagrid('getSelected');
+            if (row != null) {
+                $("#div_Data").dialog({
+                    title: "修改信息",
+                    width: 500,
+                    height: 350,
+                    closed: false,
+                    modal: true
+                });
+                $("#ID").attr("value", row.ID);
+                $("#txt_LoginName").val(row.LoginName);
+                $("#txt_RealName").val(row.RealName);
+                $("#txt_Phone").val(row.Phone);
+                $("[name='sex'][value='" + row.Sex + "']").prop("checked", "checked");
+                $("#txt_Role").find("option[value ='" + row.Role + "']").prop("selected", true);
+                $("#txt_CanDelete").attr("checked", row.CanDelete);
+            } else tip();
+        }
+        function SumbitData() {
+            var param = {};
+            var ID = $.trim($("#ID").attr("value"));
+            var LoginName = $("#txt_LoginName").val();
+            var Password = $("#txt_Password").val();
+            var RealName = $("#txt_RealName").val();
+            var Sex = $('input[name="sex"]:checked').val();
+            var Phone = $("#txt_Phone").val();
+            var Role = $("#txt_Role").val();
+            var CanDelete = $("#txt_CanDelete").is(':checked');
+            if (LoginName.length > 0 && RealName.length > 0 && Sex.length > 0 && Phone.length > 0) {
+                param.ID = parseInt(ID);
+                param.LoginName = LoginName;
+                param.Password = Password;
+                param.RealName = RealName;
+                param.Sex = Sex;
+                param.Phone = Phone;
+                param.Role = parseInt(Role);
+                param.CanDelete = CanDelete;
+                param.r = Math.random();
+                var action = (ID != "") ? "/Users/UpdateUser" : "/Users/AddUser";
+                $.post(action, param, function (result) {
+                    if (result.status == 1) {
+                        alert(result.msg);
+                        $("#div_Data").dialog("close", false);
+                        $("#UserInfo").datagrid('reload');
+                    } else {
+                        alert(result.msg);
+                    }
+                });
+            }
+            else alert("所有项不得留空!");
+        }
+        function DeleteBtn() {
+            var row = $("#UserInfo").datagrid('getSelected');
+            if (row != null) {
+                var tipdiv = row.CanDelete == true ? "#DeleteRow" : "#deltip";
+                var height = row.CanDelete == true ? 150 : 200;
+                $(tipdiv).dialog({
+                    title: "温馨提示",
+                    width: 300,
+                    height: height,
+                    closed: false,
+                    modal: true //定义窗口是不是模态（modal）窗口。
+                });
+            } else tip();
+        }
+        function DeleteRow() {
+            var row = $("#UserInfo").datagrid('getSelected');
+            $.post("/Users/NonDeleteUser", { ID: parseInt(row.ID) }, function (result) {
+                if (result.status == 1) {
+                    alert(result.msg);
+                    $("#DeleteRow").dialog("close", false);
+                    $("#UserInfo").datagrid('reload');
+                } else {
+                    alert(result.msg);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="tb" style="padding: 5px; height: auto">
+        <div style="margin-bottom: 5px">
+            <a href="#" class="easyui-linkbutton Insert" iconcls="icon-add" onclick="InsertBtn()">新增</a>
+            <a href="#" class="easyui-linkbutton Update" iconcls="icon-edit" onclick="UpdateBtn()">修改</a>
+            <a href="#" class="easyui-linkbutton Delete" iconcls="icon-remove" onclick="DeleteBtn()">删除</a>
+        </div>
+        <div>
+            登录名:
+            <input id="txtLoginName" style="width: 80px;">
+            真实姓名:
+            <input id="txtRealName" style="width: 80px;">
+            联系电话:
+            <input id="txtPhone" style="width: 80px;">
+            <a href="#" class="easyui-linkbutton Search" iconcls="icon-search" id="btn_Search" onclick=" GetUserList()">查询</a>
+        </div>
+    </div>
+    <table id="UserInfo"></table>
+    <!-- 操作-->
+    <div id="tip" class="easyui-dialog" data-options="modal:true,closed:true" style="text-align:center">
+        <h1> 请选择需要操作的行！</h1>
+        <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick='$("#tip").dialog("close", false)'>确定</a>
+    </div>
+    <div id="deltip" class="easyui-dialog" data-options="modal:true,closed:true" style="text-align:center">
+        <h1> 该用户设置为不可删除,请修改设置！</h1>
+        <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick='$("#deltip").dialog("close", false)'>确定</a>
+    </div>
+    <div id="DeleteRow" class="easyui-dialog" data-options="modal:true,closed:true" style="text-align:center">
+        <h1>确定要删除吗？</h1>
+        <input type="button" onclick='DeleteRow()' value="确定" />
+        <input type="button" onclick='$("#DeleteRow").dialog("close", false)' value="取消" />
+    </div>
+    <div id="div_Data" class="easyui-dialog" data-options="modal:true,closed:true,iconCls:'icon-add'">
+        <input type="hidden" id="ID" />
+        <input type="hidden" id="txt_Password" value="1" />
+        <table style="margin: 20px auto;" cellpadding="0" cellspacing="10">
+            <tr>
+                <td><input class="easyui-textbox" type="text" placeholder="请输入登录名" id="txt_LoginName" style="width:300px;" /></td>
+            </tr>
+            <tr>
+                <td><input class="easyui-textbox" type="text" placeholder="请输入真实姓名" id="txt_RealName" style="width:300px;" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" id="txt_Sex" name="sex" value="男" />男
+                    <input type="radio" id="txt_Sex" name="sex" value="女" />女
+                </td>
+            </tr>
+            <tr>
+                <td><input class="easyui-textbox" type="text" placeholder="请输入联系电话" id="txt_Phone" style="width:300px;" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="txt_Role" style="width:300px;">
+                        <option value="3">业务员</option>
+                        <option value="2">店长</option>
+                    </select>
+                </td>
+            </tr>
+            <tr><td><input type="checkbox" class="easyui-checkbox" id="txt_CanDelete" />可删除</td></tr>
+            <tr style="text-align:center">
+                <td colspan="2">
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="SumbitData()">确定</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick='$("#div_Data").dialog("close", false);'>取消</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
