@@ -1,24 +1,12 @@
-/*
- Navicat Premium Data Transfer
+USE Master
+GO
 
- Source Server         : MSSQLLocalDB
- Source Server Type    : SQL Server
- Source Server Version : 13004001
- Source Host           : (localdb)\MSSQLLocalDB:1433
- Source Catalog        : UPMS
- Source Schema         : dbo
+CREATE DATABASE UPMS
+GO
 
- Target Server Type    : SQL Server
- Target Server Version : 13004001
- File Encoding         : 65001
+USE UPMS
+GO
 
- Date: 19/12/2018 13:23:27
-*/
-
-
--- ----------------------------
--- Table structure for CardLevels
--- ----------------------------
 IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[CardLevels]') AND type IN ('U'))
 	DROP TABLE [dbo].[CardLevels]
 GO
