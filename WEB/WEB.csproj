@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\sqlserver.sql" />
     <Content Include="Content\css\easyui\black\accordion.css" />
     <Content Include="Content\css\easyui\black\calendar.css" />
     <Content Include="Content\css\easyui\black\combo.css" />
@@ -595,9 +596,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
